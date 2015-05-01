@@ -4,14 +4,26 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import com.two_two.offshoreview.example.Article;
+import com.two_two.offshoreview.example.FillArticle;
+import com.two_two.offshoreview.example.TestAdapter;
+
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
+    private List<Article> list;
+    private ListView titleArticlesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        list = FillArticle.getArticleList();
+        titleArticlesList= (ListView) findViewById(R.id.listViewTitleArticle);
+        titleArticlesList.setAdapter(new TestAdapter(this,list));
     }
 
 
