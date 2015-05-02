@@ -1,45 +1,23 @@
 package com.two_two.offshoreview;
 
-import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import com.two_two.offshoreview.example.Article;
-import com.two_two.offshoreview.example.FillArticle;
-import com.two_two.offshoreview.example.TestAdapter;
-
-import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity {
-    private List<Article> list;
-    private ListView titleArticlesList;
+public class DetailedArticleActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        list = FillArticle.getArticleList();
-        titleArticlesList= (ListView) findViewById(R.id.listViewTitleArticle);
-        titleArticlesList.setAdapter(new TestAdapter(this,list));
+        setContentView(R.layout.detailed_article);
     }
-
-    public void onClickToTitle(View view){
-        //temp for test
-        (TextView)view.setText()
-    }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_detailed_article, menu);
         return true;
     }
 
@@ -57,12 +35,4 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-    //tris os for change test
-
-
-    //try commit
-
 }

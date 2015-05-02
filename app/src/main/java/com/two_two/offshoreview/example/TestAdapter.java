@@ -50,6 +50,4 @@ public class TestAdapter extends BaseAdapter {
         return convertView;
     }
 
-
-
 }
