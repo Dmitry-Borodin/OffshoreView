@@ -19,6 +19,8 @@
         <activity
             android:name=".DetailedArticleActivity"
             android:label="@string/title_activity_detailed_article" >
+        <meta-data android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity"/>
         </activity>
     </application>
 

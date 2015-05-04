@@ -1,10 +1,12 @@
 package com.two_two.offshoreview;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,13 +27,21 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         list = FillArticle.getArticleList();
         titleArticlesList= (ListView) findViewById(R.id.listViewTitleArticle);
-        titleArticlesList.setAdapter(new TestAdapter(this,list));
+        final TestAdapter adapter = new TestAdapter(this, list);
+        titleArticlesList.setAdapter(adapter);
+
+        titleArticlesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, DetailedArticleActivity.class);
+                intent.putExtra("article_id", adapter.getItem(position).getId());
+                startActivity(intent);
+            }
+        });
+
     }
 
-    public void onClickToTitle(View view){
-        //temp for test
-        (TextView)view.setText()
-    }
+
 
 
 
