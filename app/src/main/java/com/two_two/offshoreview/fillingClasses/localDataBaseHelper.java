@@ -21,20 +21,20 @@ public class localDataBaseHelper extends SQLiteOpenHelper {
     public static final String CATIGORIES_NAME = "catigorie";
     public static final String TAGS_TABLENAME = "tags";
     public static final String TAGS_NAME = "tag";
-    public static final String ID = "_id";
+    public static final String ID = "id";
 //    public static final String BLOGNAME = "blogName"; //TODO надо сделать таблицу для каждого блога и убрать это поле
     public static final String ARTICLETITLE = "title";
     public static final String ARTICLECONTENT = "content";
     public static final String ARTICLEPICTURELINK = "picture";
 
-    private static final String SQL_CREATE_ENTRIES = "CREATE TABLE "+ OFFSHOREBLOG_TABLENAME + " (" + ID + " INTEGER PRIMARY KEY," + ARTICLETITLE + " VARCHAR(255)," + ARTICLECONTENT + " VARCHAR(2000)" + ARTICLEPICTURELINK + " VARCHAR(255));" +
+    private static final String SQL_CREATE_ENTRIES = "CREATE TABLE "+ OFFSHOREBLOG_TABLENAME + " (" + ID + " INTEGER PRIMARY KEY," + ARTICLETITLE + " VARCHAR(255)," + ARTICLECONTENT + " VARCHAR(2000)," + ARTICLEPICTURELINK + " VARCHAR(255));" +
             "CREATE TABLE "+ VENTUREBLOG_TABLENAME + " (" + ID + " INTEGER PRIMARY KEY," + ARTICLETITLE + " VARCHAR(255)," + ARTICLECONTENT + " VARCHAR(2000)" + ARTICLEPICTURELINK + " VARCHAR(255));" +
             "CREATE TABLE "+ EMONEYBLOG_TABLENAME + " (" + ID + " INTEGER PRIMARY KEY," + ARTICLETITLE + " VARCHAR(255)," + ARTICLECONTENT + " VARCHAR(2000)" + ARTICLEPICTURELINK + " VARCHAR(255));" +
             "CREATE TABLE "+ TAGS_TABLENAME + " (" + ID + " INTEGER PRIMARY KEY," + TAGS_NAME + " VARCHAR(255));"+
             "CREATE TABLE "+ CATIGORIES_TABLENAME + " (" + ID + " INTEGER PRIMARY KEY," + CATIGORIES_NAME + " VARCHAR(255));";
 
-    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + OFFSHOREBLOG_TABLENAME + " DROP TABLE IF EXISTS " + VENTUREBLOG_TABLENAME + " DROP TABLE IF EXISTS " + EMONEYBLOG_TABLENAME +" DROP TABLE IF EXISTS "
-            + CATIGORIES_TABLENAME + " DROP TABLE IF EXISTS " +TAGS_TABLENAME;
+    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + OFFSHOREBLOG_TABLENAME + ";DROP TABLE IF EXISTS " + VENTUREBLOG_TABLENAME + ";DROP TABLE IF EXISTS " + EMONEYBLOG_TABLENAME +";DROP TABLE IF EXISTS "
+            + CATIGORIES_TABLENAME + ";DROP TABLE IF EXISTS " +TAGS_TABLENAME;
 
 
     public localDataBaseHelper(Context context) {

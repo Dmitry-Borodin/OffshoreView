@@ -24,15 +24,17 @@ public class FillArticle {
         list.add(new Article(4, "blog1", "fourth","fourth content"));
         //TODO for now we store list and db at the same time
 
+
         // Инициализируем наш класс-обёртку
         localDataBaseHelper sqlHelper = new localDataBaseHelper(context);
 
         // База нам нужна для записи и чтения
         SQLiteDatabase sdb = sqlHelper.getWritableDatabase();
-
+        sqlHelper.onUpgrade(sdb,1,2);
         //заполняем базу
         ContentValues cv = new ContentValues();
         for (Article x:list) {
+
             cv.put(localDataBaseHelper.ID, x.getId());
             cv.put(localDataBaseHelper.ARTICLETITLE,x.getTitle());
             cv.put(localDataBaseHelper.ARTICLECONTENT,x.getContent());

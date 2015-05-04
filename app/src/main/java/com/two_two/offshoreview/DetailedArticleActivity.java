@@ -39,7 +39,8 @@ public class DetailedArticleActivity extends AppCompatActivity {
         // получаем базу
         SQLiteDatabase sqldb = sqlHelper.getWritableDatabase();
 
-        Cursor cursor = new sqldb.query(localDataBaseHelper.OFFSHOREBLOG_TABLENAME,new String[]{localDataBaseHelper.ID,localDataBaseHelper.ARTICLETITLE,localDataBaseHelper.ARTICLECONTENT,localDataBaseHelper.ARTICLEPICTURELINK},"id=currentArticleId",null,null,null,null);//TODO now always OffshoreView, should be changed
+        Cursor cursor = sqldb.query(localDataBaseHelper.OFFSHOREBLOG_TABLENAME,new String[]{localDataBaseHelper.ID,localDataBaseHelper.ARTICLETITLE,localDataBaseHelper.ARTICLECONTENT,
+                localDataBaseHelper.ARTICLEPICTURELINK},"id="+currentArticleId,null,null,null,null);//TODO now always OffshoreView, should be changed
 
         //this is filling article from list //delete it soon
 //        for (Article x : list) {

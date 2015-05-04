@@ -21,7 +21,6 @@ public class Article {
         this.blogName = blogName;
         this.title = title;
         this.content = content;
-
     }
 
     public int getId() {
