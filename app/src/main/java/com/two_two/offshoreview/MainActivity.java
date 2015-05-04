@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.two_two.offshoreview.example.Article;
 import com.two_two.offshoreview.example.FillArticle;
 import com.two_two.offshoreview.example.TestAdapter;
+import com.two_two.offshoreview.fillingClasses.localDataBaseHelper;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        list = FillArticle.getArticleList();
+        list = FillArticle.getArticleList(this);
         titleArticlesList= (ListView) findViewById(R.id.listViewTitleArticle);
         final TestAdapter adapter = new TestAdapter(this, list);
         titleArticlesList.setAdapter(adapter);
