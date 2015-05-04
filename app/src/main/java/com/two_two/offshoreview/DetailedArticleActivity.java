@@ -1,17 +1,42 @@
 package com.two_two.offshoreview;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.two_two.offshoreview.example.Article;
+import com.two_two.offshoreview.example.FillArticle;
+
+import java.util.List;
 
 
 public class DetailedArticleActivity extends ActionBarActivity {
+    private int currentArticleId;
+    private static final String ID_ARTICLE = "article_id";
+    private List<Article> list;
+    private Article currentArticle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detailed_article);
+        Intent intent = getIntent();
+        currentArticleId = intent.getIntExtra(ID_ARTICLE, 0);
+        list = FillArticle.getArticleList();
+        TextView title, content;
+        title = (TextView) findViewById(R.id.detailedArticleTitle);
+        content = (TextView) findViewById(R.id.detailedArticleContent);
+        for (Article x : list) {
+            if(x.getId() == currentArticleId){
+                currentArticle = x;
+                break;
+            }
+        }
+        title.setText(currentArticle.getTitle());
+        content.setText(currentArticle.getContent());
     }
 
     @Override

@@ -44,10 +44,12 @@ public class TestAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-       convertView = inflater.inflate(R.layout.item_menu,parent,false);
+        convertView = inflater.inflate(R.layout.item_menu,parent,false);
         TextView title = (TextView) convertView.findViewById(R.id.templateTitleTextView);
         title.setText(getItem(position).getTitle());
         return convertView;
     }
+
+
 
 }
