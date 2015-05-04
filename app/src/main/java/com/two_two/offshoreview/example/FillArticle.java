@@ -30,7 +30,7 @@ public class FillArticle {
 
         // База нам нужна для записи и чтения
         SQLiteDatabase sdb = sqlHelper.getWritableDatabase();
-        sqlHelper.onUpgrade(sdb,1,2);
+        sqlHelper.onUpgrade(sdb,1,2);   //TODO we are cleaning database now!!!
         //заполняем базу
         ContentValues cv = new ContentValues();
         for (Article x:list) {

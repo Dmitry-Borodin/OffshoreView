@@ -49,18 +49,21 @@ public class DetailedArticleActivity extends AppCompatActivity {
 //                break;
 //            }
 //        }
+        if (cursor != null){
 
-        String titleOfKnownID = cursor.getString(cursor.getColumnIndex(localDataBaseHelper.ARTICLETITLE));
-        String contentOfKnownID = cursor.getString(cursor.getColumnIndex(localDataBaseHelper.ARTICLECONTENT));
+            cursor.moveToFirst();
+            String titleOfKnownID = cursor.getString(cursor.getColumnIndex(localDataBaseHelper.ARTICLETITLE));
+            String contentOfKnownID = cursor.getString(cursor.getColumnIndex(localDataBaseHelper.ARTICLECONTENT));
 
-
-        title.setText(titleOfKnownID);
-        content.setText(contentOfKnownID);
+            title.setText(titleOfKnownID);
+            content.setText(contentOfKnownID);
+        }
         // закрываем соединения с базой данных
         sqldb.close();
         sqlHelper.close();
-        cursor.close();
 
+        assert cursor != null;
+        cursor.close();
     }
 
     @Override
