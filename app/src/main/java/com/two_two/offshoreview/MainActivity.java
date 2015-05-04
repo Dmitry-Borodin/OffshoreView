@@ -2,13 +2,12 @@ package com.two_two.offshoreview;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.two_two.offshoreview.example.Article;
 import com.two_two.offshoreview.example.FillArticle;
@@ -17,7 +16,7 @@ import com.two_two.offshoreview.example.TestAdapter;
 import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
     private List<Article> list;
     private ListView titleArticlesList;
 

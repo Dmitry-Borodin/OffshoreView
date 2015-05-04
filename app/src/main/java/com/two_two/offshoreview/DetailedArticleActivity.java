@@ -1,8 +1,8 @@
 package com.two_two.offshoreview;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -13,7 +13,7 @@ import com.two_two.offshoreview.example.FillArticle;
 import java.util.List;
 
 
-public class DetailedArticleActivity extends ActionBarActivity {
+public class DetailedArticleActivity extends AppCompatActivity {
     private int currentArticleId;
     private static final String ID_ARTICLE = "article_id";
     private List<Article> list;
