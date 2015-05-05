@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * Created by Stealps on 01.05.2015.
- */
+
 public class TestAdapter extends BaseAdapter {
 
     List<Article> articles = FillArticle.getArticleList();
@@ -52,4 +52,4 @@ public class TestAdapter extends BaseAdapter {
 
 
 
-}
+}*/
