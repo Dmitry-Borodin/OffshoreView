@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.two_two.offshoreview.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +16,7 @@ import java.util.List;
 
 public class TestAdapter extends BaseAdapter {
 
-    List<Article> articles = FillArticle.getArticleList();
+    List<Article> articles;
     private LayoutInflater inflater;
     private Context context;
 

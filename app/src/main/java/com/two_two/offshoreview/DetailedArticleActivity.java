@@ -18,7 +18,7 @@ public class DetailedArticleActivity extends AppCompatActivity {
     private static final String ID_ARTICLE = "article_id";
     private List<Article> list;
     private Article currentArticle;
-    private String title, content;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,43 @@ public class DetailedArticleActivity extends AppCompatActivity {
 //        }
 //        title.setText(currentArticle.getTitle());
 //        content.setText(currentArticle.getContent());
+        currentArticleId = intent.getIntExtra(ID_ARTICLE, 0);
+        //list = FillArticle.getArticleList();
+        TextView title, content;
+        title = (TextView) findViewById(R.id.detailedArticleTitle);
+        content = (TextView) findViewById(R.id.detailedArticleContent);
+
+        //открываем БД
+        localDataBaseHelper sqlHelper = new localDataBaseHelper(this);
+
+        // получаем базу
+        SQLiteDatabase sqldb = sqlHelper.getWritableDatabase();
+
+        Cursor cursor = sqldb.query(localDataBaseHelper.OFFSHOREBLOG_TABLENAME,new String[]{localDataBaseHelper.ID,localDataBaseHelper.ARTICLETITLE,localDataBaseHelper.ARTICLECONTENT,
+                localDataBaseHelper.ARTICLEPICTURELINK},"id="+currentArticleId,null,null,null,null);//TODO now always OffshoreView, should be changed
+
+        //this is filling article from list //delete it soon
+//        for (Article x : list) {
+//            if(x.getId() == currentArticleId){
+//                currentArticle = x;
+//                break;
+//            }
+//        }
+        if (cursor != null){
+
+            cursor.moveToFirst();
+            String titleOfKnownID = cursor.getString(cursor.getColumnIndex(localDataBaseHelper.ARTICLETITLE));
+            String contentOfKnownID = cursor.getString(cursor.getColumnIndex(localDataBaseHelper.ARTICLECONTENT));
+
+            title.setText(titleOfKnownID);
+            content.setText(contentOfKnownID);
+        }
+        // закрываем соединения с базой данных
+        sqldb.close();
+        sqlHelper.close();
+
+        assert cursor != null;
+        cursor.close();
     }
 
     @Override

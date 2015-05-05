@@ -17,6 +17,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.two_two.offshoreview.volley.AppController;
 import com.two_two.offshoreview.volley.Articles;
 import com.two_two.offshoreview.volley.CustomListAdapter;
+import com.two_two.offshoreview.example.Article;
+import com.two_two.offshoreview.example.FillArticle;
+import com.two_two.offshoreview.example.TestAdapter;
+import com.two_two.offshoreview.fillingClasses.localDataBaseHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,9 +44,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listView = (ListView) findViewById(R.id.listViewTitleArticle);
-        adapter = new CustomListAdapter(this, articlesList);
-        listView.setAdapter(adapter);
+        list = FillArticle.getArticleList();
+        titleArticlesList= (ListView) findViewById(R.id.listViewTitleArticle);
+        final TestAdapter adapter = new TestAdapter(this, list);
+        titleArticlesList.setAdapter(adapter);
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Loading...");
@@ -95,18 +100,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        hidePDialog();
-    }
 
-    private void hidePDialog() {
-        if (pDialog != null) {
-            pDialog.dismiss();
-            pDialog = null;
-        }
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
