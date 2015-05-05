@@ -130,9 +130,10 @@ public class MainActivity extends ActionBarActivity implements MainListAdapter.I
         @Override
         protected void onPostExecute(String jsonString) {
             super.onPostExecute(jsonString);
-            Log.d("MyLOG", jsonString);
-            recyclerView.swapAdapter(new CardsAdapter(parseJSON(jsonString), MainActivity.this), true);
-        }
+            if (jsonString != null) {
+                Log.d("MyLOG", jsonString);
+                recyclerView.swapAdapter(new CardsAdapter(parseJSON(jsonString), MainActivity.this), true);
+            }        }
     }
 
 
