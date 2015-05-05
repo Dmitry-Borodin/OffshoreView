@@ -1,4 +1,4 @@
-package com.two_two.offshoreview.volley;
+package com.two_two.offshoreview.data;
 
 import com.two_two.offshoreview.example.Article;
 

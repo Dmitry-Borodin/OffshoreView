@@ -1,4 +1,4 @@
-package com.two_two.offshoreview.volley;
+package com.two_two.offshoreview.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,10 +11,9 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.two_two.offshoreview.R;
+import com.two_two.offshoreview.data.Articles;
+import com.two_two.offshoreview.volley.AppController;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**

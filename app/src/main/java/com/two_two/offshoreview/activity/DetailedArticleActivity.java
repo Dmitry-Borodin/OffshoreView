@@ -1,4 +1,4 @@
-package com.two_two.offshoreview;
+package com.two_two.offshoreview.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.example.Article;
-import com.two_two.offshoreview.example.FillArticle;
 
 import java.util.List;
 
@@ -18,6 +18,7 @@ public class DetailedArticleActivity extends AppCompatActivity {
     private static final String ID_ARTICLE = "article_id";
     private List<Article> list;
     private Article currentArticle;
+    private String title, content;
 
 
     @Override
@@ -33,20 +34,8 @@ public class DetailedArticleActivity extends AppCompatActivity {
         tvTitle.setText(title);
         tvContent.setText(content);
 
-//        list = FillArticle.getArticleList();
-//        TextView title, content;
-//        title = (TextView) findViewById(R.id.detailedArticleTitle);
-//        content = (TextView) findViewById(R.id.detailedArticleContent);
-//        for (Article x : list) {
-//            if(x.getId() == currentArticleId){
-//                currentArticle = x;
-//                break;
-//            }
-//        }
-//        title.setText(currentArticle.getTitle());
-//        content.setText(currentArticle.getContent());
+/*   //TODO implement save articles in the database
         currentArticleId = intent.getIntExtra(ID_ARTICLE, 0);
-        //list = FillArticle.getArticleList();
         TextView title, content;
         title = (TextView) findViewById(R.id.detailedArticleTitle);
         content = (TextView) findViewById(R.id.detailedArticleContent);
@@ -60,13 +49,7 @@ public class DetailedArticleActivity extends AppCompatActivity {
         Cursor cursor = sqldb.query(localDataBaseHelper.OFFSHOREBLOG_TABLENAME,new String[]{localDataBaseHelper.ID,localDataBaseHelper.ARTICLETITLE,localDataBaseHelper.ARTICLECONTENT,
                 localDataBaseHelper.ARTICLEPICTURELINK},"id="+currentArticleId,null,null,null,null);//TODO now always OffshoreView, should be changed
 
-        //this is filling article from list //delete it soon
-//        for (Article x : list) {
-//            if(x.getId() == currentArticleId){
-//                currentArticle = x;
-//                break;
-//            }
-//        }
+
         if (cursor != null){
 
             cursor.moveToFirst();
@@ -82,6 +65,7 @@ public class DetailedArticleActivity extends AppCompatActivity {
 
         assert cursor != null;
         cursor.close();
+    } */
     }
 
     @Override

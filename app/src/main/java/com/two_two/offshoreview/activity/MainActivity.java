@@ -1,4 +1,4 @@
-package com.two_two.offshoreview;
+package com.two_two.offshoreview.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,14 +13,13 @@ import android.widget.ListView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.volley.AppController;
-import com.two_two.offshoreview.volley.Articles;
-import com.two_two.offshoreview.volley.CustomListAdapter;
-import com.two_two.offshoreview.example.Article;
-import com.two_two.offshoreview.example.FillArticle;
-import com.two_two.offshoreview.example.TestAdapter;
-import com.two_two.offshoreview.fillingClasses.localDataBaseHelper;
+import com.two_two.offshoreview.data.Articles;
+import com.two_two.offshoreview.adapter.CustomListAdapter;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,30 +36,30 @@ public class MainActivity extends AppCompatActivity {
 
     private ProgressDialog pDialog;
     private List<Articles> articlesList = new ArrayList<Articles>();
-    private ListView listView;
-    private CustomListAdapter adapter;
+    private ListView listViewArticles;
+    private CustomListAdapter customListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        list = FillArticle.getArticleList();
-        titleArticlesList= (ListView) findViewById(R.id.listViewTitleArticle);
-        final TestAdapter adapter = new TestAdapter(this, list);
-        titleArticlesList.setAdapter(adapter);
+
+        listViewArticles = (ListView) findViewById(R.id.listViewTitleArticle);
+        customListAdapter = new CustomListAdapter(this, articlesList);
+        listViewArticles.setAdapter(customListAdapter);
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Loading...");
         pDialog.show();
 
 
-
+        //TODO create new method and add this in method
         JsonObjectRequest articleReq = new JsonObjectRequest( url,  new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.d(TAG, response.toString());
                 hidePDialog();
-
+                //parsing JSON
                 try {
                     JSONArray arrayPostsFromJson = response.getJSONArray("posts");
                     for (int i = 0; i < arrayPostsFromJson.length(); i++) {
@@ -75,27 +74,39 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            adapter.notifyDataSetChanged();
+            customListAdapter.notifyDataSetChanged(); //update adapter
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                VolleyLog.e(TAG, error.getMessage());
             }
         });
         AppController.getInstance().addToRequestQueue(articleReq);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewArticles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, DetailedArticleActivity.class);
-                intent.putExtra("article_title", adapter.getItem(position).getTitle());
-                intent.putExtra("article_content", adapter.getItem(position).getContent());
+                intent.putExtra("article_title", customListAdapter.getItem(position).getTitle());
+                intent.putExtra("article_content", customListAdapter.getItem(position).getContent());
                 startActivity(intent);
             }
         });
 
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        hidePDialog();
+    }
+
+    private void hidePDialog() {
+        if (pDialog != null) {
+            pDialog.dismiss();
+            pDialog = null;
+        }
     }
 
 

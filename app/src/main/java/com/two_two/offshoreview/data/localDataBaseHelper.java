@@ -1,4 +1,4 @@
-package com.two_two.offshoreview.fillingClasses;
+package com.two_two.offshoreview.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.two_two.offshoreview.fillingClasses.localDataBaseHelper;
+import com.two_two.offshoreview.data.localDataBaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
