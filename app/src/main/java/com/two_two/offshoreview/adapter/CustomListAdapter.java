@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.two_two.offshoreview.R;
-import com.two_two.offshoreview.data.Articles;
+import com.two_two.offshoreview.data.Article;
 import com.two_two.offshoreview.volley.AppController;
 
 import java.util.List;
@@ -22,22 +22,22 @@ import java.util.List;
 public class CustomListAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
-    private List<Articles> articlesList;
+    private List<Article> articleList;
 
     ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
-    public CustomListAdapter(Activity activity, List<Articles> articlesList){
+    public CustomListAdapter(Activity activity, List<Article> articleList){
         this.activity = activity;
-        this.articlesList = articlesList;
+        this.articleList = articleList;
     }
     @Override
     public int getCount() {
-        return articlesList.size();
+        return articleList.size();
     }
 
     @Override
-    public Articles getItem(int position) {
-        return articlesList.get(position);
+    public Article getItem(int position) {
+        return articleList.get(position);
     }
 
     @Override
@@ -60,10 +60,10 @@ public class CustomListAdapter extends BaseAdapter {
         NetworkImageView thumbNail = (NetworkImageView) convertView.findViewById(R.id.articleImg);
         TextView title = (TextView) convertView.findViewById(R.id.articleTitle);
         TextView date = (TextView) convertView.findViewById(R.id.articleDate);
-        Articles articles = articlesList.get(position);
-        thumbNail.setImageUrl(articles.getThumbnailUrl(), imageLoader);
-        title.setText(articles.getTitle());
-        date.setText(articles.getDate());
+        Article article = articleList.get(position);
+        thumbNail.setImageUrl(article.getThumbnailUrl(), imageLoader);
+        title.setText(article.getTitle());
+        date.setText(article.getDate());
         return convertView;
     }
 

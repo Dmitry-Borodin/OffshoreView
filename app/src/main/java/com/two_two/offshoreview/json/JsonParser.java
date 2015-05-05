@@ -8,7 +8,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.two_two.offshoreview.adapter.CustomListAdapter;
-import com.two_two.offshoreview.data.Articles;
+import com.two_two.offshoreview.data.Article;
 import com.two_two.offshoreview.volley.AppController;
 
 import org.json.JSONArray;
@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class JsonParser {
     public static void jsonParser(Context context, String url, final String TAG,
-                                  final List<Articles> articlesList,
+                                  final List<Article> articleList,
                                   final CustomListAdapter customListAdapter) {
 
         //Progress loading...
@@ -37,13 +37,14 @@ public class JsonParser {
                 try {
                     JSONArray arrayPostsFromJson = response.getJSONArray("posts");
                     for (int i = 0; i < arrayPostsFromJson.length(); i++) {
-                        Articles articles = new Articles();
+                        Article article = new Article();
                         JSONObject currentObject = arrayPostsFromJson.getJSONObject(i);
-                        articles.setTitle(currentObject.getString("title"));
-                        articles.setThumbnailUrl(currentObject.getString("thumbnail"));
-                        articles.setDate(currentObject.getString("date"));
-                        articles.setContent(currentObject.getString("content"));
-                        articlesList.add(articles);
+                        article.setTitle(currentObject.getString("title"));
+                        article.setThumbnailUrl(currentObject.getString("thumbnail"));
+                        article.setDate(currentObject.getString("date"));
+                        article.setContent(currentObject.getString("content"));
+                        article.setBlogType(Article.blogName.offshore_blog);        //TODO this should depend of where are we getting this data;
+                        articleList.add(article);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -4,15 +4,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.two_two.offshoreview.data.Article;
 import com.two_two.offshoreview.data.localDataBaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Stealps on 01.05.2015.
- * templorary class to fill articles while we don't have internet filling
+ * Created by Stealps on 01.05.2015. it will not be used, but here is good example of DB work!
+ *
  */
+/*
 public class FillArticle {
     public static List<Article> list;
 
@@ -50,3 +52,4 @@ public class FillArticle {
 
 
 }
+*/

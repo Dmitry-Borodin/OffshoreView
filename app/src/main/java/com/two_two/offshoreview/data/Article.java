@@ -1,23 +1,28 @@
 package com.two_two.offshoreview.data;
 
-import com.two_two.offshoreview.example.Article;
-
 /**
- * Created by marazm on 04.05.15.
+ * This is article class, we
  */
-public class Articles {
+public class Article {
     private String title, thumbnailUrl, content;
     private String date;
+    public enum blogName{offshore_blog,venture_blog,emoney_blog};
+    private blogName blogType;
 
-    public Articles(){
+    public Article(){
 
     }
 
-    public Articles(String title, String thumbnailUrl, String content, String date) {
+    public Article(String title, String thumbnailUrl, String content, String date, blogName blog) {
         this.title = title;
         this.thumbnailUrl = thumbnailUrl;
         this.content = content;
         this.date = date;
+        this.blogType=blog;
+    }
+
+    public blogName getBlogType() {
+        return blogType;
     }
 
     public String getTitle() {
@@ -34,6 +39,10 @@ public class Articles {
 
     public String getDate() {
         return date;
+    }
+
+    public void setBlogType(blogName blogType) {
+        this.blogType = blogType;
     }
 
     public void setContent(String content) {

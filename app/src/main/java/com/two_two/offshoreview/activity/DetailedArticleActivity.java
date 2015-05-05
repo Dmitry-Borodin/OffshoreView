@@ -5,11 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.two_two.offshoreview.R;
-import com.two_two.offshoreview.example.Article;
+import com.two_two.offshoreview.data.Article;
 
 import java.util.List;
 

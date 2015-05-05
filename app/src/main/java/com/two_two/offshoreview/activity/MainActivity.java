@@ -1,11 +1,8 @@
 package com.two_two.offshoreview.activity;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +11,7 @@ import android.widget.ListView;
 import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.json.JsonParser;
 import com.two_two.offshoreview.json.ProgressDialogForJson;
-import com.two_two.offshoreview.data.Articles;
+import com.two_two.offshoreview.data.Article;
 import com.two_two.offshoreview.adapter.CustomListAdapter;
 
 import java.util.ArrayList;
@@ -26,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String url = "http://offshoreview.eu/api/get_recent_posts/?json=1&json_unescaped_unicode=1&count=15";
 
-    private List<Articles> articlesList = new ArrayList<Articles>();
+    private List<Article> articleList = new ArrayList<Article>();
     private ListView listViewArticles;
     private CustomListAdapter customListAdapter;
 
@@ -37,12 +34,12 @@ public class MainActivity extends AppCompatActivity {
 
         listViewArticles = (ListView) findViewById(R.id.listViewTitleArticle);
 
-        customListAdapter = new CustomListAdapter(this, articlesList);
+        customListAdapter = new CustomListAdapter(this, articleList);
 
         listViewArticles.setAdapter(customListAdapter);
 
         //JsonParser
-        JsonParser.jsonParser(MainActivity.this, url, TAG, articlesList, customListAdapter);
+        JsonParser.jsonParser(MainActivity.this, url, TAG, articleList, customListAdapter);
         //ClickListView
         listViewArticles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
