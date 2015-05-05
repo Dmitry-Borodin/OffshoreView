@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.two_two.offshoreview.R;
@@ -28,13 +29,15 @@ public class DetailedArticleActivity extends AppCompatActivity {
         Intent intent = getIntent();
         title = intent.getStringExtra("article_title");
         content = intent.getStringExtra("article_content");
+        content.replace("p", " ");
         TextView tvTitle, tvContent;
         tvTitle = (TextView) findViewById(R.id.detailedArticleTitle);
         tvContent = (TextView) findViewById(R.id.detailedArticleContent);
         tvTitle.setText(title);
         tvContent.setText(content);
 
-/*   //TODO implement save articles in the database
+
+/*   //TODO implement save articles in the database. Need create new Class with Method.
         currentArticleId = intent.getIntExtra(ID_ARTICLE, 0);
         TextView title, content;
         title = (TextView) findViewById(R.id.detailedArticleTitle);

@@ -63,7 +63,6 @@ public class CustomListAdapter extends BaseAdapter {
         Articles articles = articlesList.get(position);
         thumbNail.setImageUrl(articles.getThumbnailUrl(), imageLoader);
         title.setText(articles.getTitle());
-
         date.setText(articles.getDate());
         return convertView;
     }
