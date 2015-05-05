@@ -10,7 +10,7 @@ public class FillArticle {
     public static List<Article> list;
 
     public static List<Article> getArticleList(){
-        list = new ArrayList<Article>();
+        list = new ArrayList<>();
         list.add(new Article("first","first content"));
         list.add(new Article("second","second content"));
         list.add(new Article("third","third content"));
