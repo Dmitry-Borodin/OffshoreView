@@ -1,16 +1,16 @@
 package com.two_two.offshoreview.data;
 
 /**
- * This is article class, we
+ * This is article class
  */
 public class Article {
     private String title, thumbnailUrl, content;
     private String date;
-    public enum blogName{offshore_blog,venture_blog,emoney_blog};
+    public enum blogName{OFFSHORE_BLOG, VENTURE_BLOG, EMONEY_BLOG};
     private blogName blogType;
+    int id;
 
     public Article(){
-
     }
 
     public Article(String title, String thumbnailUrl, String content, String date, blogName blog) {
@@ -23,6 +23,10 @@ public class Article {
 
     public blogName getBlogType() {
         return blogType;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -39,6 +43,10 @@ public class Article {
 
     public String getDate() {
         return date;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setBlogType(blogName blogType) {

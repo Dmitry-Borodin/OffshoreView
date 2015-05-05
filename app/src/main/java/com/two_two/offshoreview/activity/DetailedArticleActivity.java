@@ -1,6 +1,8 @@
 package com.two_two.offshoreview.activity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 
 import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.data.Article;
+import com.two_two.offshoreview.data.LocalDataBaseHelper;
 
 import java.util.List;
 
@@ -25,38 +28,39 @@ public class DetailedArticleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detailed_article);
+
         Intent intent = getIntent();
-        title = intent.getStringExtra("article_title");
-        content = intent.getStringExtra("article_content");
-        content.replace("p", " ");
+        /*
+//        title = intent.getStringExtra("article_title");   It deleted from MainActivity. Dmitry.
+//        content = intent.getStringExtra("article_content");
         TextView tvTitle, tvContent;
         tvTitle = (TextView) findViewById(R.id.detailedArticleTitle);
         tvContent = (TextView) findViewById(R.id.detailedArticleContent);
         tvTitle.setText(title);
         tvContent.setText(content);
+*/
 
-
-/*   //TODO implement save articles in the database. Need create new Class with Method.
+  //TODO implement save articles in the database. Need create new Class with Method.
         currentArticleId = intent.getIntExtra(ID_ARTICLE, 0);
         TextView title, content;
         title = (TextView) findViewById(R.id.detailedArticleTitle);
         content = (TextView) findViewById(R.id.detailedArticleContent);
 
         //открываем БД
-        localDataBaseHelper sqlHelper = new localDataBaseHelper(this);
+        LocalDataBaseHelper sqlHelper = new LocalDataBaseHelper(this);
 
         // получаем базу
         SQLiteDatabase sqldb = sqlHelper.getWritableDatabase();
-
-        Cursor cursor = sqldb.query(localDataBaseHelper.OFFSHOREBLOG_TABLENAME,new String[]{localDataBaseHelper.ID,localDataBaseHelper.ARTICLETITLE,localDataBaseHelper.ARTICLECONTENT,
-                localDataBaseHelper.ARTICLEPICTURELINK},"id="+currentArticleId,null,null,null,null);//TODO now always OffshoreView, should be changed
+        //BEWARE!!!!! i don't look for BlogType!!!
+        Cursor cursor = sqldb.query(LocalDataBaseHelper.OFFSHOREBLOG_TABLENAME,new String[]{LocalDataBaseHelper.ID,LocalDataBaseHelper.ARTICLETITLE,LocalDataBaseHelper.ARTICLECONTENT,
+                LocalDataBaseHelper.ARTICLEPICTURELINK},"id="+currentArticleId,null,null,null,null);//TODO now always OffshoreView, should be changed
 
 
         if (cursor != null){
 
             cursor.moveToFirst();
-            String titleOfKnownID = cursor.getString(cursor.getColumnIndex(localDataBaseHelper.ARTICLETITLE));
-            String contentOfKnownID = cursor.getString(cursor.getColumnIndex(localDataBaseHelper.ARTICLECONTENT));
+            String titleOfKnownID = cursor.getString(cursor.getColumnIndex(LocalDataBaseHelper.ARTICLETITLE));
+            String contentOfKnownID = cursor.getString(cursor.getColumnIndex(LocalDataBaseHelper.ARTICLECONTENT));
 
             title.setText(titleOfKnownID);
             content.setText(contentOfKnownID);
@@ -67,7 +71,6 @@ public class DetailedArticleActivity extends AppCompatActivity {
 
         assert cursor != null;
         cursor.close();
-    } */
     }
 
     @Override

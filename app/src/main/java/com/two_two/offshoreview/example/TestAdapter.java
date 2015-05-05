@@ -12,7 +12,7 @@ import com.two_two.offshoreview.R;
 import java.util.List;
 
 /**
- * Created by Stealps on 01.05.2015.
+ * THIS IS OLD adapter. delete it???
 
 public class TestAdapter extends BaseAdapter {
 

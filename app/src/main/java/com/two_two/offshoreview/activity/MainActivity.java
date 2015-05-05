@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, DetailedArticleActivity.class);
-                intent.putExtra("article_title", customListAdapter.getItem(position).getTitle());
-                intent.putExtra("article_content", customListAdapter.getItem(position).getContent());
+                intent.putExtra("article_id", customListAdapter.getItem(position).getId());
+                intent.putExtra("article blogType",customListAdapter.getItem(position).getBlogType());
                 startActivity(intent);
             }
         });

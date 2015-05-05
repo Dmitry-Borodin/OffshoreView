@@ -11,9 +11,11 @@ import android.util.Log;
  * as for 04.05 используем поля id, title, content (2000символов), date created, categories (string array) TODO не забыть проверку на символы сделать
  * еще создать таблицу с категориями и тегами (по 2 поля)
  */
-public class localDataBaseHelper extends SQLiteOpenHelper {
+public class LocalDataBaseHelper extends SQLiteOpenHelper {
+    private static final String TAG = LocalDataBaseHelper.class.getSimpleName();
+
     private static  final String DATABASE_NAME = "offshore_view_articles.db";
-    private static final int DATABASE_VERSION = 1;      //hardcored
+    private static final int DATABASE_VERSION = 1;                             //hardcoded version
     public static final String OFFSHOREBLOG_TABLENAME = "offshore_view";
     public static final String VENTUREBLOG_TABLENAME = "venture_view";
     public static final String EMONEYBLOG_TABLENAME = "emoney_view";
@@ -22,7 +24,6 @@ public class localDataBaseHelper extends SQLiteOpenHelper {
     public static final String TAGS_TABLENAME = "tags";
     public static final String TAGS_NAME = "tag";
     public static final String ID = "id";
-//    public static final String BLOGNAME = "blogName"; //TODO надо сделать таблицу для каждого блога и убрать это поле
     public static final String ARTICLETITLE = "title";
     public static final String ARTICLECONTENT = "content";
     public static final String ARTICLEPICTURELINK = "picture";
@@ -37,7 +38,7 @@ public class localDataBaseHelper extends SQLiteOpenHelper {
             + CATIGORIES_TABLENAME + ";DROP TABLE IF EXISTS " +TAGS_TABLENAME;
 
 
-    public localDataBaseHelper(Context context) {
+    public LocalDataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -48,7 +49,7 @@ public class localDataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.w("TAG","DB updating from version "+ oldVersion + " to version " + newVersion + " and deleting all old data"); //TODO make TAG
+        Log.w(TAG,"DB updating from version "+ oldVersion + " to version " + newVersion + " and deleting all old data"); //TODO make TAG
         db.execSQL(SQL_DELETE_ENTRIES);
         onCreate(db);
     }
