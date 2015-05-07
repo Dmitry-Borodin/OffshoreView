@@ -2,7 +2,6 @@ package com.two_two.offshoreview.fragment;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -20,7 +19,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.two_two.offshoreview.R;
-import com.two_two.offshoreview.activity.MainActivity;
 import com.two_two.offshoreview.adapter.BlogNamesRecyclerAdapter;
 import com.two_two.offshoreview.data.BlogNames;
 
@@ -145,8 +143,8 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     public static interface ClickListener {
-        public void onClick(View view, int position);
-        public void onLongClick(View view, int position);
+        void onClick(View view, int position);
+        void onLongClick(View view, int position);
     }
 
 
