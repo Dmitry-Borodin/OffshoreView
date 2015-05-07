@@ -2,13 +2,16 @@ package com.two_two.offshoreview.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import com.two_two.offshoreview.R;
+import com.two_two.offshoreview.fragment.NavigationDrawerFragment;
 import com.two_two.offshoreview.json.JsonParser;
 import com.two_two.offshoreview.json.ProgressDialogForJson;
 import com.two_two.offshoreview.data.Article;
@@ -26,16 +29,27 @@ public class MainActivity extends AppCompatActivity {
     private List<Article> articleList = new ArrayList<Article>();
     private ListView listViewArticles;
     private CustomListAdapter customListAdapter;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        //work for Toolbar
+        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+        //work for navigation drawer
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment)
+                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
+
+        //work for article list
         listViewArticles = (ListView) findViewById(R.id.listViewTitleArticle);
-
         customListAdapter = new CustomListAdapter(this, articleList);
-
         listViewArticles.setAdapter(customListAdapter);
 
         //JsonParser
