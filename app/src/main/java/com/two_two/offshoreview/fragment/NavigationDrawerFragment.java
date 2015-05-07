@@ -91,19 +91,7 @@ public class NavigationDrawerFragment extends Fragment {
 
                     @Override
                     public void onLongClick(View view, int position) {
-                        switch (position){
-                            case 0:
-                                Toast.makeText(getActivity(), "Будет открыватся *Муждународный Бизнес*", Toast.LENGTH_SHORT).show();
-                                break;
-                            case 1:
-                                Toast.makeText(getActivity(), "Будет открыватся *Електронная комерция*", Toast.LENGTH_SHORT).show();
-                                break;
-                            case 2:
-                                Toast.makeText(getActivity(), "Будет открыватся *Инвестиции и стартапы*", Toast.LENGTH_SHORT).show();
-                                break;
-                            default:
-                                break;
-                        }
+                        onClick(view, position);
                     }
                 }));
         return rootView;
