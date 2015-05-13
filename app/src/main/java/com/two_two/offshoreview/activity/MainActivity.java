@@ -21,6 +21,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.two_two.offshoreview.R;
+import com.two_two.offshoreview.fragment.FragmentEmoneyView;
+import com.two_two.offshoreview.fragment.FragmentOffshoreView;
+import com.two_two.offshoreview.fragment.FragmentVentureView;
 import com.two_two.offshoreview.fragment.NavigationDrawerFragment;
 import com.two_two.offshoreview.json.JsonParser;
 import com.two_two.offshoreview.json.ProgressDialogForJson;
@@ -51,6 +54,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        Fragment fragment = new FragmentOffshoreView();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment).commit();
+
+
         //work for Toolbar
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
@@ -61,11 +70,6 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
 
-        //Tabs
-        mPager = (ViewPager) findViewById(R.id.pagerView);
-        mPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-        mTabs = (SlidingTabLayout) findViewById(R.id.slidingTabs);
-        mTabs.setViewPager(mPager);
 /* TODO add after test Tabs
         //work for article list
         listViewArticles = (ListView) findViewById(R.id.listViewTitleArticle);
@@ -93,6 +97,29 @@ public class MainActivity extends AppCompatActivity {
         ProgressDialogForJson.hidePDialog();
     }*/
 } //delete after unComment
+    // show FragmentBlog
+    public void onSelectDrawerItem(int position){
+        Fragment fragment = null;
+        switch (position) {
+            case 0:
+                fragment = new FragmentOffshoreView();
+                break;
+            case 1:
+                fragment = new FragmentEmoneyView();
+                break;
+            case 2:
+                fragment = new FragmentVentureView();
+            default:
+                break;
+        }
+        if(fragment != null){
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment).commit();
+
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -114,56 +141,4 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    //PagerAdapter
-    class MyPagerAdapter extends FragmentPagerAdapter{
-        String [] testTabs;
-        public MyPagerAdapter(FragmentManager fm) {
-            super(fm);
-            testTabs = new String[]{"Новости", "Статьи", "Юрисдикции",
-                    "События в мире", "Аналитика", "Интересное"};
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            FragmentTabs fragmentTabs = FragmentTabs.getInstance(position);
-
-            return fragmentTabs;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return testTabs[position];
-        }
-
-        @Override
-        public int getCount() {
-            return testTabs.length;
-        }
-    }
-    //Fragment for slidingTabs
-    public static class FragmentTabs extends Fragment{
-        private TextView textView;
-        public static FragmentTabs getInstance(int position){
-            FragmentTabs fragmentTabs = new FragmentTabs();
-            Bundle bundle = new Bundle();
-            bundle.putInt("position", position);
-            fragmentTabs.setArguments(bundle);
-            return fragmentTabs;
-        }
-
-        @Nullable
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_tabs, container, false);
-
-            textView = (TextView) rootView.findViewById(R.id.position);
-            Bundle args = getArguments();
-            if(args != null) {
-                textView.setText("Page number " + args.getInt("position"));
-            }
-
-            return rootView;
-        }
-    }
-
 }

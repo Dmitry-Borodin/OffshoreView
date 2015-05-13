@@ -13,22 +13,25 @@
     <include
         android:id="@+id/app_bar"
         layout="@layout/app_bar"/>
-    <com.two_two.offshoreview.tabs.SlidingTabLayout
+    <!-- <com.two_two.offshoreview.tabs.SlidingTabLayout
         android:id="@+id/slidingTabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <android.support.v4.view.ViewPager
-        android:id="@+id/pagerView"
+         android:id="@+id/pagerView"
+         android:layout_width="match_parent"
+         android:layout_height="0dp"
+         android:layout_weight="1"/>-->
+    <FrameLayout
+        android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-
-    <!-- TODO create in fragment.
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listViewTitleArticle"
-        />-->
+        android:layout_height="match_parent"/>
+     <!-- TODO create in fragment.
+     <ListView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:id="@+id/listViewTitleArticle"
+         />-->
 </LinearLayout>
     <fragment
         android:id="@+id/fragment_navigation_drawer"

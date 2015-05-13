@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.two_two.offshoreview.R;
+import com.two_two.offshoreview.activity.MainActivity;
 import com.two_two.offshoreview.adapter.BlogNamesRecyclerAdapter;
 import com.two_two.offshoreview.data.BlogNames;
 
@@ -72,15 +75,16 @@ public class NavigationDrawerFragment extends Fragment {
                 new ClickListener() {
                     @Override
                     public void onClick(View view, int position) {
+
                         switch (position){
                             case 0:
-                                Toast.makeText(getActivity(), "Будет открыватся *Муждународный Бизнес*", Toast.LENGTH_SHORT).show();
+                                showFragment(position);
                                 break;
                             case 1:
-                                Toast.makeText(getActivity(), "Будет открыватся *Електронная комерция*", Toast.LENGTH_SHORT).show();
+                                showFragment(position);
                                 break;
                             case 2:
-                                Toast.makeText(getActivity(), "Будет открыватся *Инвестиции и стартапы*", Toast.LENGTH_SHORT).show();
+                                showFragment(position);
                                 break;
                             default:
                                 break;
@@ -93,6 +97,11 @@ public class NavigationDrawerFragment extends Fragment {
                     }
                 }));
         return rootView;
+    }
+
+    private void showFragment(int position){
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+        ((MainActivity) getActivity()).onSelectDrawerItem(position);
     }
 
     public static List<BlogNames> getBlogNames() {
