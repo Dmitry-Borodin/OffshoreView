@@ -12,7 +12,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.two_two.offshoreview.adapter.CustomListAdapter;
 import com.two_two.offshoreview.data.Article;
 import com.two_two.offshoreview.data.LocalDataBaseHelper;
-import com.two_two.offshoreview.volley.AppController;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +22,8 @@ import java.util.List;
 /**
  * Created by marazm on 05.05.15.
  */
+
+//TODO not use now. Work with fragment. Mb delete this class in future.
 public class JsonParser {
     private static final String TAG = JsonParser.class.getSimpleName();
     public static void jsonParser(final Context context, String url, final String TAG,
@@ -67,7 +68,7 @@ public class JsonParser {
                 VolleyLog.e(TAG, error.getMessage());
             }
         });
-        AppController.getInstance().addToRequestQueue(articleReq);
+     //   AppController.getInstance().addToRequestQueue(articleReq);
     }
 
     /*

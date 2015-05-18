@@ -74,8 +74,7 @@ public class FragmentEmoneyView extends Fragment {
             View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_tabs, container, false);
             container.addView(view);
 
-            TextView textView = (TextView) view.findViewById(R.id.position);
-            textView.setText(String.valueOf(position + 1));
+
 
             return view;
         }

@@ -12,7 +12,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.data.Article;
-import com.two_two.offshoreview.volley.AppController;
+import com.two_two.offshoreview.volley.VolleySingleton;
 
 import java.util.List;
 
@@ -24,11 +24,16 @@ public class CustomListAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private List<Article> articleList;
 
-    ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+    private VolleySingleton volleySingleton;
+    private ImageLoader imageLoader;
+
+   // ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
     public CustomListAdapter(Activity activity, List<Article> articleList){
         this.activity = activity;
         this.articleList = articleList;
+        volleySingleton = VolleySingleton.getInstance();
+        imageLoader = volleySingleton.getImageLoader();
     }
     @Override
     public int getCount() {
@@ -55,17 +60,19 @@ public class CustomListAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.item_menu, null);
         }
         if (imageLoader == null) {
-            imageLoader = AppController.getInstance().getImageLoader();
+            imageLoader = volleySingleton.getImageLoader();
         }
         NetworkImageView thumbNail = (NetworkImageView) convertView.findViewById(R.id.articleImg);
         TextView title = (TextView) convertView.findViewById(R.id.articleTitle);
         TextView date = (TextView) convertView.findViewById(R.id.articleDate);
+        TextView category = (TextView) convertView.findViewById(R.id.tvTestCategory);
         Article article = articleList.get(position);
         thumbNail.setImageUrl(article.getThumbnailUrl(), imageLoader);
+        category.setText(article.getCategory());
         title.setText(article.getTitle());
         date.setText(article.getDate());
         return convertView;
-    }
+       }
 
 
 }

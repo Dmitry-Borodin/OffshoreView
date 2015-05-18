@@ -4,11 +4,21 @@ package com.two_two.offshoreview.data;
  * This is article class
  */
 public class Article {
-    private String title, thumbnailUrl, content;
-    private String date;
+    private String title, thumbnailUrl, content, date, category;
     public enum blogName{OFFSHORE_BLOG, VENTURE_BLOG, EMONEY_BLOG};
     private blogName blogType;
-    int id;
+    private int id;
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "title='" + title + '\'' +
+                ", thumbnailUrl='" + thumbnailUrl + '\'' +
+                ", content='" + content + '\'' +
+                ", date='" + date + '\'' +
+                ", id=" + id +
+                '}';
+    }
 
     public Article(){
     }
@@ -67,5 +77,13 @@ public class Article {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

@@ -20,8 +20,15 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/articleImg"
         android:layout_toRightOf="@+id/articleImg"
-        android:textStyle="bold" />
-
+        android:textStyle="bold"
+        android:text="qwe"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvTestCategory"
+        android:text="qwe"
+        android:layout_toRightOf="@+id/articleImg"
+        android:layout_below="@+id/articleTitle"/>
 
 
     <!-- Article date -->
@@ -31,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:text="qwe"
          />
 
 </RelativeLayout>
