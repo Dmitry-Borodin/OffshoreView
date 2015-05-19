@@ -49,6 +49,7 @@ public class FragmentOffshoreView extends Fragment {
     private ArrayList<Article> listArticle = new ArrayList<>();
     private CustomListAdapter adapter;
     private ListView listViewArticleFragment;
+    private Thread threadParser;
 
     public FragmentOffshoreView(){
 
@@ -63,7 +64,14 @@ public class FragmentOffshoreView extends Fragment {
         super.onCreate(savedInstanceState);
         volleySingleton = VolleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
-        sendJsonRequest();
+
+        threadParser = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                sendJsonRequest();
+            }
+        });
+        threadParser.run();
     }
 
     private void sendJsonRequest() {
@@ -168,6 +176,11 @@ public class FragmentOffshoreView extends Fragment {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
+            try {
+                threadParser.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_tabs, container, false);
             container.addView(view);
             if(category[position] == "Новости" ) {
