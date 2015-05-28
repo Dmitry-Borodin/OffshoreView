@@ -1,29 +1,23 @@
 package com.two_two.offshoreview.fragment;
 
-import android.app.DownloadManager;
+
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.adapter.CustomListAdapter;
 import com.two_two.offshoreview.data.Article;
-import com.two_two.offshoreview.tabs.SlidingTabLayout;
 import com.two_two.offshoreview.volley.VolleySingleton;
 
 import org.json.JSONArray;
@@ -37,49 +31,47 @@ import java.util.ArrayList;
  */
 public class FragmentOffshoreView extends Fragment {
 
-    private static final String url = "http://offshoreview.eu/api/get_recent_posts/?json=1&json_unescaped_unicode=1&count=15";
-
-
-    private SlidingTabLayout mSlidingTabLayout;
-    private ViewPager mViewPager;
+    private static final String url = "http://offshoreview.eu/api/get_recent_posts/?json=1&json_unescaped_unicode=1&count=7";
 
     private VolleySingleton volleySingleton;
-    private ImageLoader imageLoader;
     private RequestQueue requestQueue;
     private ArrayList<Article> listArticle = new ArrayList<>();
     private CustomListAdapter adapter;
     private ListView listViewArticleFragment;
-    private Thread threadParser;
+
+    private ProgressDialog pDialog;
+
+    public void hidePDialog() {
+        if (pDialog != null) {
+            pDialog.dismiss();
+            pDialog = null;
+        }
+
+    }
 
     public FragmentOffshoreView(){
 
     }
-
-    private String[] category = {"Новости", "Статьи", "Юрисдикции", "События в мире",
-                                "Аналитика", "Интересное"};
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         volleySingleton = VolleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
-
-        threadParser = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                sendJsonRequest();
-            }
-        });
-        threadParser.run();
+        pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Загрузка...");
+        pDialog.show();
+        sendJsonRequest();
     }
 
     private void sendJsonRequest() {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
+
             @Override
             public void onResponse(JSONObject response) {
                 listArticle = parseJSONResponse(response);
-                adapter.notifyDataSetChanged();
+                adapter.setArticleList(listArticle);
+                hidePDialog();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -97,6 +89,7 @@ public class FragmentOffshoreView extends Fragment {
         if(response == null || response.length() > 0){
 
         }
+
         try {
             JSONArray arrayArticle = response.getJSONArray("posts");
             for (int i = 0; i < arrayArticle.length(); i++) {
@@ -130,14 +123,17 @@ public class FragmentOffshoreView extends Fragment {
 
         }
         return listArticle;
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_blog_with_tabs, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_tabs, container, false);
 
-
+        listViewArticleFragment = (ListView) rootView.findViewById(R.id.listArticleFragment);
+        adapter = new CustomListAdapter(getActivity(), listArticle);
+        listViewArticleFragment.setAdapter(adapter);
         return rootView;
     }
 
@@ -146,55 +142,4 @@ public class FragmentOffshoreView extends Fragment {
         super.onResume();
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.name_fragment_offshore);
     }
-
-    @Override
-    public void onViewCreated(View view,Bundle savedInstanceState) {
-
-        mViewPager = (ViewPager) view.findViewById(R.id.viewPagerBlogs);
-        mViewPager.setAdapter(new MyPagerAdapter());
-
-        mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.slidingTabBlogs);
-        mSlidingTabLayout.setViewPager(mViewPager);
-    }
-
-    class MyPagerAdapter extends PagerAdapter {
-
-        @Override
-        public int getCount() {
-            return category.length;
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return object == view;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return category[position];
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            try {
-                threadParser.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_tabs, container, false);
-            container.addView(view);
-            if(category[position] == "Новости" ) {
-                listViewArticleFragment = (ListView) view.findViewById(R.id.listArticleFragment);
-                adapter = new CustomListAdapter(getActivity(), listArticle);
-                listViewArticleFragment.setAdapter(adapter);
-            }
-            return view;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View)object);
-        }
-    }
-
 }

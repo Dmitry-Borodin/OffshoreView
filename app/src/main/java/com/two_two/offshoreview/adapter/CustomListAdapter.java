@@ -14,6 +14,7 @@ import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.data.Article;
 import com.two_two.offshoreview.volley.VolleySingleton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,14 +23,19 @@ import java.util.List;
 public class CustomListAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
-    private List<Article> articleList;
+    private ArrayList<Article> articleList = new ArrayList<>();
 
     private VolleySingleton volleySingleton;
     private ImageLoader imageLoader;
 
    // ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
-    public CustomListAdapter(Activity activity, List<Article> articleList){
+    public void setArticleList(ArrayList<Article> articleList){
+                this.articleList=articleList;
+                notifyDataSetChanged();
+        }
+
+    public CustomListAdapter(Activity activity, ArrayList<Article> articleList){
         this.activity = activity;
         this.articleList = articleList;
         volleySingleton = VolleySingleton.getInstance();

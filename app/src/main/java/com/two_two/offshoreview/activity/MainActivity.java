@@ -1,52 +1,26 @@
 package com.two_two.offshoreview.activity;
 
-import android.content.Intent;
+
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.fragment.FragmentEmoneyView;
 import com.two_two.offshoreview.fragment.FragmentOffshoreView;
 import com.two_two.offshoreview.fragment.FragmentVentureView;
 import com.two_two.offshoreview.fragment.NavigationDrawerFragment;
-import com.two_two.offshoreview.json.JsonParser;
-import com.two_two.offshoreview.json.ProgressDialogForJson;
-import com.two_two.offshoreview.data.Article;
-import com.two_two.offshoreview.adapter.CustomListAdapter;
-import com.two_two.offshoreview.tabs.SlidingTabLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String TAG = MainActivity.class.getSimpleName();
-    private static final String url = "http://offshoreview.eu/api/get_recent_posts/?json=1&json_unescaped_unicode=1&count=15";
-
-    private List<Article> articleList = new ArrayList<Article>();
-    private ListView listViewArticles;
-    private CustomListAdapter customListAdapter;
     private Toolbar toolbar;
     //Tabs
-    private ViewPager mPager;
-    private SlidingTabLayout mTabs;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
