@@ -9,21 +9,37 @@
         android:id="@+id/app_bar"
         layout="@layout/app_bar"/>
 
+
     <TextView
-        android:layout_width="352dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/detailedArticleTitle" />
+        android:id="@+id/detailedArticleTitle"
+        android:gravity="center"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/detailedArticleImg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="8dp" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/detailedArticleContent"
-        android:layout_weight="1.03"/>
+        android:layout_weight="1.03"
+        android:padding="5dp"
+        android:textIsSelectable="true"/>
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>
