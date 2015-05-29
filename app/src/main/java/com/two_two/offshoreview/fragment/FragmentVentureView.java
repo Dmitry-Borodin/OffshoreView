@@ -1,12 +1,14 @@
 package com.two_two.offshoreview.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -15,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.two_two.offshoreview.R;
+import com.two_two.offshoreview.activity.DetailedArticleActivity;
 import com.two_two.offshoreview.adapter.CustomListAdapter;
 import com.two_two.offshoreview.data.Article;
 import com.two_two.offshoreview.volley.VolleySingleton;
@@ -25,13 +28,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by marazm on 13.05.2015.
- */
+
 public class FragmentVentureView extends Fragment {
 
 
-    private static final String url = "http://ventureview.eu/api/get_recent_posts/?json=1&json_unescaped_unicode=1&count=7";
+    private static final String url = "http://ventureview.eu/api/get_recent_posts/?json=1&json_unescaped_unicode=1&count=10";
 
     private VolleySingleton volleySingleton;
     private RequestQueue requestQueue;
@@ -134,6 +135,18 @@ public class FragmentVentureView extends Fragment {
         listViewArticleFragment = (ListView) rootView.findViewById(R.id.listArticleFragment);
         adapter = new CustomListAdapter(getActivity(), listArticle);
         listViewArticleFragment.setAdapter(adapter);
+
+        listViewArticleFragment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), DetailedArticleActivity.class);
+                intent.putExtra("article_title", adapter.getItem(position).getTitle());
+                intent.putExtra("article_content", adapter.getItem(position).getContent());
+                intent.putExtra("article_img", adapter.getItem(position).getThumbnailUrl());
+                startActivity(intent);
+            }
+        });
+
         return rootView;
     }
 

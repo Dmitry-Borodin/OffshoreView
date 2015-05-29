@@ -29,9 +29,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by marazm on 12.05.2015.
- */
 public class FragmentOffshoreView extends Fragment {
 
     private static final String url = "http://offshoreview.eu/api/get_recent_posts/?json=1&json_unescaped_unicode=1&count=10";
@@ -145,7 +142,6 @@ public class FragmentOffshoreView extends Fragment {
                 intent.putExtra("article_title", adapter.getItem(position).getTitle());
                 intent.putExtra("article_content", adapter.getItem(position).getContent());
                 intent.putExtra("article_img", adapter.getItem(position).getThumbnailUrl());
-                intent.putExtra("article_id", "offshoreview");
                 startActivity(intent);
             }
         });

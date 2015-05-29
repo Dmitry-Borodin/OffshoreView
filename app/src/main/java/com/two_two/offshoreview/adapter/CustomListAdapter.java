@@ -17,9 +17,7 @@ import com.two_two.offshoreview.volley.VolleySingleton;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by marazm on 04.05.15.
- */
+
 public class CustomListAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
@@ -68,17 +66,26 @@ public class CustomListAdapter extends BaseAdapter {
         if (imageLoader == null) {
             imageLoader = volleySingleton.getImageLoader();
         }
-        NetworkImageView thumbNail = (NetworkImageView) convertView.findViewById(R.id.articleImg);
-        TextView title = (TextView) convertView.findViewById(R.id.articleTitle);
-        TextView date = (TextView) convertView.findViewById(R.id.articleDate);
-        TextView category = (TextView) convertView.findViewById(R.id.tvTestCategory);
+        ViewHolder holder = new ViewHolder();
+        holder.thumbNail = (NetworkImageView) convertView.findViewById(R.id.articleImg);
+        holder.title = (TextView) convertView.findViewById(R.id.articleTitle);
+        holder.date = (TextView) convertView.findViewById(R.id.articleDate);
+        holder.category = (TextView) convertView.findViewById(R.id.tvTestCategory);
         Article article = articleList.get(position);
-        thumbNail.setImageUrl(article.getThumbnailUrl(), imageLoader);
-        category.setText(article.getCategory());
-        title.setText(article.getTitle());
-        date.setText(article.getDate());
+        holder.thumbNail.setImageUrl(article.getThumbnailUrl(), imageLoader);
+        holder.category.setText(article.getCategory());
+        holder.title.setText(article.getTitle());
+        holder.date.setText(article.getDate());
+        convertView.setTag(holder);
         return convertView;
        }
+
+    static class ViewHolder {
+        NetworkImageView thumbNail;
+        TextView title;
+        TextView date;
+        TextView category;
+    }
 
 
 }
