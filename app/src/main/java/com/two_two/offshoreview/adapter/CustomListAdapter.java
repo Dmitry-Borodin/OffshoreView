@@ -15,7 +15,6 @@ import com.two_two.offshoreview.data.Article;
 import com.two_two.offshoreview.volley.VolleySingleton;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class CustomListAdapter extends BaseAdapter {
@@ -25,8 +24,6 @@ public class CustomListAdapter extends BaseAdapter {
 
     private VolleySingleton volleySingleton;
     private ImageLoader imageLoader;
-
-   // ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
     public void setArticleList(ArrayList<Article> articleList){
                 this.articleList=articleList;

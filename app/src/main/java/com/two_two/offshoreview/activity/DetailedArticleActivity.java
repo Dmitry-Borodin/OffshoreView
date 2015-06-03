@@ -43,8 +43,6 @@ public class DetailedArticleActivity extends AppCompatActivity {
         content = intent.getStringExtra("article_content");
         img = intent.getStringExtra("article_img");
         img = img.replace("-150x150", "");
-//        content = content.replace("<p>", "");
-//        content = content.replace("</p>", "");
         thumbNail = (NetworkImageView) findViewById(R.id.detailedArticleImg);
         tvTitle = (TextView) findViewById(R.id.detailedArticleTitle);
         tvContent = (TextView) findViewById(R.id.detailedArticleContent);

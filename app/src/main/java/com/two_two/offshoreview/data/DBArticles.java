@@ -9,9 +9,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-/**
- * Created by marazm on 03.06.2015.
- */
+
 public class DBArticles {
     private ArticleHelper mHelper;
     private SQLiteDatabase mDatabase;
@@ -25,18 +23,18 @@ public class DBArticles {
 
     public void insertArticlesInDataBase(ArrayList<Article> listArticles, boolean clearDataBase, String blogName){
         if(clearDataBase){
-            if(blogName == "offshore"){
+            if(blogName.equals("offshore")){
                 deleteTable(blogName);
-            } else if (blogName == "venture"){
+            } else if (blogName.equals("venture")){
                 deleteTable(blogName);
             } else {
                 deleteTable(blogName);
             }
         }
         String dataBase;
-        if(blogName == "offshore"){
+        if(blogName.equals("offshore")){
             dataBase = ArticleHelper.OFFSHORE_TABLE;
-        } else if (blogName == "venture"){
+        } else if (blogName.equals("venture")){
             dataBase = ArticleHelper.VENTURE_TABLE;
         } else {
             dataBase = ArticleHelper.EMONEY_TABLE;
@@ -63,9 +61,9 @@ public class DBArticles {
     public ArrayList<Article> getArticleWithDataBase(String blogName) {
         ArrayList<Article> listArticles = new ArrayList<>();
         String dataBase;
-        if(blogName == "offshore"){
+        if(blogName.equals("offshore")){
             dataBase = ArticleHelper.OFFSHORE_TABLE;
-        } else if (blogName == "venture") {
+        } else if (blogName.equals("venture")) {
             dataBase = ArticleHelper.VENTURE_TABLE;
         } else {
             dataBase = ArticleHelper.EMONEY_TABLE;
@@ -99,9 +97,9 @@ public class DBArticles {
     }
 
     public void deleteTable(String table){
-        if(table == "offshore"){
+        if(table.equals("offshore")){
             mDatabase.delete(ArticleHelper.OFFSHORE_TABLE, null, null);
-        } else if(table == "venture"){
+        } else if(table.equals("venture")){
             mDatabase.delete(ArticleHelper.VENTURE_TABLE, null, null);
         } else {
             mDatabase.delete(ArticleHelper.EMONEY_TABLE, null, null);

@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,7 +17,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.activity.MainActivity;
@@ -28,9 +26,7 @@ import com.two_two.offshoreview.data.BlogNames;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class NavigationDrawerFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -151,7 +147,7 @@ public class NavigationDrawerFragment extends Fragment {
         });
     }
 
-    public static interface ClickListener {
+    public interface ClickListener {
         void onClick(View view, int position);
         void onLongClick(View view, int position);
     }

@@ -1,7 +1,5 @@
 package com.two_two.offshoreview.fragment;
 
-import android.app.ProgressDialog;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,29 +11,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.activity.DetailedArticleActivity;
 import com.two_two.offshoreview.adapter.CustomListAdapter;
 import com.two_two.offshoreview.callbacks.ArticleLoadListenerEmoney;
 import com.two_two.offshoreview.data.Article;
-import com.two_two.offshoreview.service.MyLoadService;
 import com.two_two.offshoreview.task.TaskLoadArticlesEmoney;
 import com.two_two.offshoreview.volley.MyApplication;
-import com.two_two.offshoreview.volley.VolleySingleton;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-
-import me.tatarka.support.job.JobInfo;
-import me.tatarka.support.job.JobScheduler;
 
 
 public class FragmentEmoneyView extends Fragment implements ArticleLoadListenerEmoney, SwipeRefreshLayout.OnRefreshListener {
@@ -72,7 +56,7 @@ public class FragmentEmoneyView extends Fragment implements ArticleLoadListenerE
         if(savedInstanceState!=null){
             listArticle = savedInstanceState.getParcelableArrayList(STATE_ARTICLES);
         } else {
-            listArticle = MyApplication.getWriteableDatabase().getArticleWithDataBase(BLOG_NAME);
+            listArticle = MyApplication.getWritableDatabase().getArticleWithDataBase(BLOG_NAME);
             if(listArticle.isEmpty()){
                 new TaskLoadArticlesEmoney(this).execute();
             }

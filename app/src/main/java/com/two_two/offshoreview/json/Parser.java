@@ -8,15 +8,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by marazm on 03.06.2015.
- */
+
 public class Parser {
     public static ArrayList<Article> parseJSONResponse(JSONObject response) {
 
         ArrayList<Article> listArticle = new ArrayList<>();
 
-        if(response == null || response.length() > 0){
+        if(response != null && response.length() > 0){
             try {
                 JSONArray arrayArticle = response.getJSONArray("posts");
                 for (int i = 0; i < arrayArticle.length(); i++) {

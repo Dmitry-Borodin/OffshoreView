@@ -1,8 +1,6 @@
 package com.two_two.offshoreview.data;
 
-/**
- * Created by marazm on 07.05.15.
- */
+
 public class BlogNames {
     public int getIconId() {
         return iconId;

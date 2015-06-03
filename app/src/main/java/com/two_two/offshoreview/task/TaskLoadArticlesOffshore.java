@@ -10,9 +10,6 @@ import com.two_two.offshoreview.volley.VolleySingleton;
 
 import java.util.ArrayList;
 
-/**
- * Created by marazm on 03.06.2015.
- */
 public class TaskLoadArticlesOffshore extends AsyncTask<Void, Void, ArrayList<Article>> {
     private ArticleLoadListenerOffshore myComponent;
     private VolleySingleton volleySingleton;
@@ -24,7 +21,7 @@ public class TaskLoadArticlesOffshore extends AsyncTask<Void, Void, ArrayList<Ar
         requestQueue = volleySingleton.getRequestQueue();
     }
     @Override
-    protected ArrayList<Article> doInBackground(Void... voids) {
+    protected ArrayList<Article> doInBackground(Void... params) {
         ArrayList<Article> listArticles = ArticleUtils.loadListArticleOffshore(requestQueue);
         return listArticles;
     }
@@ -35,4 +32,5 @@ public class TaskLoadArticlesOffshore extends AsyncTask<Void, Void, ArrayList<Ar
             myComponent.onArticleLoadListenerOffshore(articles);
         }
     }
+
 }

@@ -1,9 +1,7 @@
 package com.two_two.offshoreview.activity;
 
 
-import android.content.ComponentName;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -15,11 +13,8 @@ import com.two_two.offshoreview.fragment.FragmentEmoneyView;
 import com.two_two.offshoreview.fragment.FragmentOffshoreView;
 import com.two_two.offshoreview.fragment.FragmentVentureView;
 import com.two_two.offshoreview.fragment.NavigationDrawerFragment;
-import com.two_two.offshoreview.service.MyLoadService;
 
-import me.tatarka.support.job.JobInfo;
 import me.tatarka.support.job.JobScheduler;
-import me.tatarka.support.os.PersistableBundle;
 
 
 public class MainActivity extends AppCompatActivity {

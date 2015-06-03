@@ -23,7 +23,7 @@ public class MyApplication extends Application {
     public static Context getAppContext(){
         return sInstance.getApplicationContext();
     }
-    public synchronized static DBArticles getWriteableDatabase() {
+    public synchronized static DBArticles getWritableDatabase() {
         if (mDatabase == null) {
             mDatabase = new DBArticles(getAppContext());
         }

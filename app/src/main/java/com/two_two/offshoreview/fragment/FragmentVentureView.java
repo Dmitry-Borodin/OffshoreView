@@ -1,9 +1,7 @@
 package com.two_two.offshoreview.fragment;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -13,11 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.activity.DetailedArticleActivity;
 import com.two_two.offshoreview.adapter.CustomListAdapter;
@@ -25,11 +18,6 @@ import com.two_two.offshoreview.callbacks.ArticleLoadListenerVenture;
 import com.two_two.offshoreview.data.Article;
 import com.two_two.offshoreview.task.TaskLoadArticlesVenture;
 import com.two_two.offshoreview.volley.MyApplication;
-import com.two_two.offshoreview.volley.VolleySingleton;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -66,7 +54,7 @@ public class FragmentVentureView extends Fragment implements ArticleLoadListener
         if(savedInstanceState!=null){
             listArticle = savedInstanceState.getParcelableArrayList(STATE_ARTICLES);
         } else {
-            listArticle = MyApplication.getWriteableDatabase().getArticleWithDataBase(BLOG_NAME);
+            listArticle = MyApplication.getWritableDatabase().getArticleWithDataBase(BLOG_NAME);
             if(listArticle.isEmpty()){
                 new TaskLoadArticlesVenture(this).execute();
             }

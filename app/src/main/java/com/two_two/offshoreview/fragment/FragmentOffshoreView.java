@@ -54,7 +54,7 @@ public class FragmentOffshoreView extends Fragment implements ArticleLoadListene
         if(savedInstanceState!=null){
             listArticle = savedInstanceState.getParcelableArrayList(STATE_ARTICLES);
         } else {
-            listArticle = MyApplication.getWriteableDatabase().getArticleWithDataBase(BLOG_NAME);
+            listArticle = MyApplication.getWritableDatabase().getArticleWithDataBase(BLOG_NAME);
             if(listArticle.isEmpty()){
                 new TaskLoadArticlesOffshore(this).execute();
             }
