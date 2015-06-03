@@ -1,13 +1,46 @@
 package com.two_two.offshoreview.data;
 
-/**
- * This is article class
- */
-public class Article {
-    private String title, thumbnailUrl, content, date, category;
-    public enum blogName{OFFSHORE_BLOG, VENTURE_BLOG, EMONEY_BLOG};
-    private blogName blogType;
-    private int id;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Article implements Parcelable{
+
+
+    private long articleId;
+    private String title;
+    private String thumbnailUrl;
+    private String content;
+    private String date;
+    private String category;
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(title);
+        parcel.writeString(thumbnailUrl);
+        parcel.writeString(content);
+        parcel.writeString(date);
+        parcel.writeString(category);
+    }
+
+
+    public static final Parcelable.Creator<Article> CREATOR
+            = new Parcelable.Creator<Article>() {
+
+        @Override
+        public Article createFromParcel(Parcel parcel) {
+            return new Article(parcel);
+        }
+
+        @Override
+        public Article[] newArray(int i) {
+            return new Article[i];
+        }
+    };
 
     @Override
     public String toString() {
@@ -16,29 +49,26 @@ public class Article {
                 ", thumbnailUrl='" + thumbnailUrl + '\'' +
                 ", content='" + content + '\'' +
                 ", date='" + date + '\'' +
-                ", id=" + id +
                 '}';
     }
 
     public Article(){
     }
-
-    public Article(String title, String thumbnailUrl, String content, String date, blogName blog) {
-        this.title = title;
-        this.thumbnailUrl = thumbnailUrl;
-        this.content = content;
-        this.date = date;
-        this.blogType=blog;
+    public Article(Parcel input){
+        this.title = input.readString();
+        this.thumbnailUrl = input.readString();
+        this.content = input.readString();
+        this.date = input.readString();
+        this.category = input.readString();
     }
 
-    public blogName getBlogType() {
-        return blogType;
+    public long getArticleId() {
+        return articleId;
     }
 
-    public int getId() {
-        return id;
+    public void setArticleId(long articleId) {
+        this.articleId = articleId;
     }
-
     public String getTitle() {
         return title;
     }
@@ -53,14 +83,6 @@ public class Article {
 
     public String getDate() {
         return date;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setBlogType(blogName blogType) {
-        this.blogType = blogType;
     }
 
     public void setContent(String content) {

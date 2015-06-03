@@ -12,31 +12,49 @@ import android.util.Log;
  * еще создать таблицу с категориями и тегами (по 2 поля)
  */
 public class LocalDataBaseHelper extends SQLiteOpenHelper {
-    private static final String TAG = LocalDataBaseHelper.class.getSimpleName();
+    private static final String TAG = "com.marazmone.DataBase";
 
     private static  final String DATABASE_NAME = "offshore_view_articles.db";
     private static final int DATABASE_VERSION = 1;                             //hardcoded version
-    public static final String OFFSHOREBLOG_TABLENAME = "offshore_view";
-    public static final String VENTUREBLOG_TABLENAME = "venture_view";
-    public static final String EMONEYBLOG_TABLENAME = "emoney_view";
-    public static final String CATIGORIES_TABLENAME = "categories";
-    public static final String CATIGORIES_NAME = "catigorie";
-    public static final String TAGS_TABLENAME = "tags";
-    public static final String TAGS_NAME = "tag";
-    public static final String ID = "id";
-    public static final String ARTICLETITLE = "title";
-    public static final String ARTICLECONTENT = "content";
-    public static final String ARTICLEPICTURELINK = "picture";
+    public static final String OFFSHORE_TABLE = "offshore_view";
+    public static final String VENTURE_TABLE = "venture_view";
+    public static final String EMONEY_TABLE = "emoney_view";
+    public static final String ID = "_id";
+    public static final String ARTICLE_ID = "article_id";
+    public static final String ARTICLE_TITLE = "title";
+    public static final String ARTICLE_CONTENT = "content";
+    public static final String ARTICLE_CATEGORY = "category";
+    public static final String ARTICLE_DATE = "date";
+    public static final String ARTICLE_IMG = "img";
 
-    private static final String SQL_CREATE_ENTRIES = "CREATE TABLE "+ OFFSHOREBLOG_TABLENAME + " (" + ID + " INTEGER PRIMARY KEY," + ARTICLETITLE + " VARCHAR(255)," + ARTICLECONTENT + " VARCHAR(2000)," + ARTICLEPICTURELINK + " VARCHAR(255));" +
-            "CREATE TABLE "+ VENTUREBLOG_TABLENAME + " (" + ID + " INTEGER PRIMARY KEY," + ARTICLETITLE + " VARCHAR(255)," + ARTICLECONTENT + " VARCHAR(2000)" + ARTICLEPICTURELINK + " VARCHAR(255));" +
-            "CREATE TABLE "+ EMONEYBLOG_TABLENAME + " (" + ID + " INTEGER PRIMARY KEY," + ARTICLETITLE + " VARCHAR(255)," + ARTICLECONTENT + " VARCHAR(2000)" + ARTICLEPICTURELINK + " VARCHAR(255));" +
-            "CREATE TABLE "+ TAGS_TABLENAME + " (" + ID + " INTEGER PRIMARY KEY," + TAGS_NAME + " VARCHAR(255));"+
-            "CREATE TABLE "+ CATIGORIES_TABLENAME + " (" + ID + " INTEGER PRIMARY KEY," + CATIGORIES_NAME + " VARCHAR(255));";
+    private static final String SQL_CREATE_ENTRIES = "CREATE TABLE "+ OFFSHORE_TABLE + " ("
+            + ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + ARTICLE_ID + " INTEGER,"
+            + ARTICLE_TITLE + " TEXT,"
+            + ARTICLE_CONTENT + " TEXT,"
+            + ARTICLE_CATEGORY + " TEXT,"
+            + ARTICLE_DATE + " TEXT,"
+            + ARTICLE_IMG + " TEXT;" +
+            "CREATE TABLE "+ VENTURE_TABLE + " ("
+            + ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + ARTICLE_ID + " INTEGER,"
+            + ARTICLE_TITLE + " TEXT,"
+            + ARTICLE_CONTENT + " TEXT,"
+            + ARTICLE_CATEGORY + " TEXT,"
+            + ARTICLE_DATE + " TEXT,"
+            + ARTICLE_IMG + " TEXT;" +
+            "CREATE TABLE "+ EMONEY_TABLE + " ("
+            + ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + ARTICLE_ID + " INTEGER,"
+            + ARTICLE_TITLE + " TEXT,"
+            + ARTICLE_CONTENT + " TEXT,"
+            + ARTICLE_CATEGORY + " TEXT,"
+            + ARTICLE_DATE + " TEXT,"
+            + ARTICLE_IMG + " TEXT;";
 
-    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + OFFSHOREBLOG_TABLENAME + ";DROP TABLE IF EXISTS " + VENTUREBLOG_TABLENAME + ";DROP TABLE IF EXISTS " + EMONEYBLOG_TABLENAME +";DROP TABLE IF EXISTS "
-            + CATIGORIES_TABLENAME + ";DROP TABLE IF EXISTS " +TAGS_TABLENAME;
-
+    private static final String SQL_DELETE_OFFSHORE = "DROP TABLE IF EXISTS " + OFFSHORE_TABLE;
+    private static final String SQL_DELETE_VENTURE = "DROP TABLE IF EXISTS " + VENTURE_TABLE;
+    private static final String SQL_DELETE_EMONEY = "DROP TABLE IF EXISTS " + EMONEY_TABLE;
 
     public LocalDataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -49,8 +67,10 @@ public class LocalDataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.w(TAG,"DB updating from version "+ oldVersion + " to version " + newVersion + " and deleting all old data"); //TODO make TAG
-        db.execSQL(SQL_DELETE_ENTRIES);
+        Log.w(TAG,"DB updating from version "+ oldVersion + " to version " + newVersion + " and deleting all old data");
+        db.execSQL(SQL_DELETE_OFFSHORE);
+        db.execSQL(SQL_DELETE_VENTURE);
+        db.execSQL(SQL_DELETE_EMONEY);
         onCreate(db);
     }
 }
