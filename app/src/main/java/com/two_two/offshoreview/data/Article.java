@@ -12,6 +12,7 @@ public class Article implements Parcelable{
     private String content;
     private String date;
     private String category;
+    private String urlArticle;
 
     @Override
     public int describeContents() {
@@ -60,6 +61,14 @@ public class Article implements Parcelable{
         this.content = input.readString();
         this.date = input.readString();
         this.category = input.readString();
+    }
+
+    public String getUrlArticle() {
+        return urlArticle;
+    }
+
+    public void setUrlArticle(String urlArticle) {
+        this.urlArticle = urlArticle;
     }
 
     public long getArticleId() {

@@ -24,6 +24,7 @@ public class Parser {
                     String thumbnail = currentArticle.getString("thumbnail");
                     String date = currentArticle.getString("date");
                     String content = currentArticle.getString("content");
+                    String urlArticle = currentArticle.getString("url");
                     JSONArray categoryArray = currentArticle.getJSONArray("categories");
                     Article article = new Article();
                     for (int j = 0; j < categoryArray.length(); j++) {
@@ -36,6 +37,7 @@ public class Parser {
                     article.setThumbnailUrl(thumbnail);
                     article.setDate(date);
                     article.setContent(content);
+                    article.setUrlArticle(urlArticle);
 
                     listArticle.add(article);
 

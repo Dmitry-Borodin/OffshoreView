@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="24dp"
         android:text="Large Text"
         android:id="@+id/detailedArticleTitle"
         android:gravity="center"/>
@@ -27,14 +27,14 @@
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/detailedArticleImg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_marginRight="8dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="18dp"
         android:text="Medium Text"
         android:id="@+id/detailedArticleContent"
         android:layout_weight="1.03"

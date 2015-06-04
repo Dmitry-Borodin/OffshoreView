@@ -68,6 +68,7 @@ public class FragmentEmoneyView extends Fragment implements ArticleLoadListenerE
                 Intent intent = new Intent(getActivity(), DetailedArticleActivity.class);
                 intent.putExtra("article_title", adapter.getItem(position).getTitle());
                 intent.putExtra("article_content", adapter.getItem(position).getContent());
+                intent.putExtra("article_url", adapter.getItem(position).getUrlArticle());
                 intent.putExtra("article_img", adapter.getItem(position).getThumbnailUrl());
                 startActivity(intent);
             }

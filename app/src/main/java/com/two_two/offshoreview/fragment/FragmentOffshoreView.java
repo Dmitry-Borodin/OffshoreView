@@ -41,7 +41,7 @@ public class FragmentOffshoreView extends Fragment implements ArticleLoadListene
         super.onCreate(savedInstanceState);
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tabs, container, false);
 
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefresh);
@@ -68,6 +68,7 @@ public class FragmentOffshoreView extends Fragment implements ArticleLoadListene
                 intent.putExtra("article_title", adapter.getItem(position).getTitle());
                 intent.putExtra("article_content", adapter.getItem(position).getContent());
                 intent.putExtra("article_img", adapter.getItem(position).getThumbnailUrl());
+                intent.putExtra("article_url", adapter.getItem(position).getUrlArticle());
                 startActivity(intent);
             }
         });

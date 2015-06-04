@@ -198,7 +198,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         @Override
         public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-            
+
         }
     }
 
