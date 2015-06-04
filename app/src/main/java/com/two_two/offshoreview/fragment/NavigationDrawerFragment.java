@@ -195,6 +195,11 @@ public class NavigationDrawerFragment extends Fragment {
         @Override
         public void onTouchEvent(RecyclerView rv, MotionEvent e) {
         }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+            
+        }
     }
 
     public static void saveToPreferences(Context context, String preferenceName, String preferenceValue) {
