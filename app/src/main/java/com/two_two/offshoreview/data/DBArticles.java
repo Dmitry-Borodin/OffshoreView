@@ -188,11 +188,7 @@ public class DBArticles {
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             Log.w(TAG, "DB updating from version " + oldVersion + " to version " + newVersion + " and deleting all old data");
-            if (newVersion > oldVersion){
-                db.execSQL(SQL_ALTER_COLUMN_OFFSHORE);
-                db.execSQL(SQL_ALTER_COLUMN_VENTURE);
-                db.execSQL(SQL_ALTER_COLUMN_EMONEY);
-            }
+
             db.execSQL(SQL_DELETE_OFFSHORE);
             db.execSQL(SQL_DELETE_VENTURE);
             db.execSQL(SQL_DELETE_EMONEY);
