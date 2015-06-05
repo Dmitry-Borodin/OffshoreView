@@ -113,7 +113,7 @@ public class DBArticles {
         private static final String TAG = "com.marazmone.DataBase";
 
         private static  final String DATABASE_NAME = "offshore_view_articles.db";
-        private static final int DATABASE_VERSION = 2;                             //hardcoded version
+        private static final int DATABASE_VERSION = 3;                             //hardcoded version
         public static final String OFFSHORE_TABLE = "offshore_view";
         public static final String VENTURE_TABLE = "venture_view";
         public static final String EMONEY_TABLE = "emoney_view";
@@ -192,6 +192,8 @@ public class DBArticles {
             db.execSQL(SQL_DELETE_OFFSHORE);
             db.execSQL(SQL_DELETE_VENTURE);
             db.execSQL(SQL_DELETE_EMONEY);
+
+            onCreate(db);
         }
     }
 }
