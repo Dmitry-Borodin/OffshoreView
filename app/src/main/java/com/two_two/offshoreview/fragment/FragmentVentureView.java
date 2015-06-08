@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 
 public class FragmentVentureView extends Fragment implements ArticleLoadListenerVenture, SwipeRefreshLayout.OnRefreshListener {
-    private static final String STATE_ARTICLES = "articles_state";
+    private static final String STATE_ARTICLES = "com.two_two.offshoreview.articles_state_venture";
     private static final String BLOG_NAME = "venture";
 
     private ArrayList<Article> listArticle = new ArrayList<>();
@@ -65,10 +65,10 @@ public class FragmentVentureView extends Fragment implements ArticleLoadListener
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), DetailedArticleActivity.class);
-                intent.putExtra("article_title", adapter.getItem(position).getTitle());
-                intent.putExtra("article_content", adapter.getItem(position).getContent());
-                intent.putExtra("article_url", adapter.getItem(position).getUrlArticle());
-                intent.putExtra("article_img", adapter.getItem(position).getThumbnailUrl());
+                intent.putExtra(getString(R.string.article_title_intent), adapter.getItem(position).getTitle());
+                intent.putExtra(getString(R.string.article_content_intent), adapter.getItem(position).getContent());
+                intent.putExtra(getString(R.string.article_url_intent), adapter.getItem(position).getUrlArticle());
+                intent.putExtra(getString(R.string.article_img_intent), adapter.getItem(position).getThumbnailUrl());
                 startActivity(intent);
             }
         });

@@ -1,7 +1,5 @@
 package com.two_two.offshoreview.json;
 
-import android.util.Log;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -26,11 +24,7 @@ public class Requestor {
         requestQueue.add(request);
         try {
             response = requestFuture.get(30000, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            Log.d("TagMYNYHFBK", e.getMessage());
-        } catch (TimeoutException e) {
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
             e.printStackTrace();
         }
         return response;

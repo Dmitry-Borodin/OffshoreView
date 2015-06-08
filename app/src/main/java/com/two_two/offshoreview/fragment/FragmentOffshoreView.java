@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class FragmentOffshoreView extends Fragment implements ArticleLoadListenerOffshore, SwipeRefreshLayout.OnRefreshListener {
 
-    private static final String STATE_ARTICLES = "articles_state";
+    private static final String STATE_ARTICLES = "com.two_two.offshoreview.articles_state_offshore";
     private static final String BLOG_NAME = "offshore";
 
     private ArrayList<Article> listArticle = new ArrayList<>();
@@ -65,10 +65,10 @@ public class FragmentOffshoreView extends Fragment implements ArticleLoadListene
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), DetailedArticleActivity.class);
-                intent.putExtra("article_title", adapter.getItem(position).getTitle());
-                intent.putExtra("article_content", adapter.getItem(position).getContent());
-                intent.putExtra("article_img", adapter.getItem(position).getThumbnailUrl());
-                intent.putExtra("article_url", adapter.getItem(position).getUrlArticle());
+                intent.putExtra(getString(R.string.article_title_intent), adapter.getItem(position).getTitle());
+                intent.putExtra(getString(R.string.article_content_intent), adapter.getItem(position).getContent());
+                intent.putExtra(getString(R.string.article_img_intent), adapter.getItem(position).getThumbnailUrl());
+                intent.putExtra(getString(R.string.article_url_intent), adapter.getItem(position).getUrlArticle());
                 startActivity(intent);
             }
         });

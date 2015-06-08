@@ -14,7 +14,7 @@
             <item name="android:textColorSecondary">#FFFFFF</item>
 
         </style>
-    <style name="MyShareActionProviderStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle">
+       <style name="MyShareActionProviderStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle">
         <item name="android:textColor">#ff000000</item>
     </style>
     </resources>

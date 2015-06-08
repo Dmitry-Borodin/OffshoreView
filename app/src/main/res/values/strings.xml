@@ -12,4 +12,9 @@
     <string name="name_fragment_offshore">Международный бизнес</string>
     <string name="name_fragment_venture">Инвестиции и стартапы</string>
     <string name="name_fragment_emoney">Электронная коммерция</string>
+    <string name="title_detail_activity">Статья</string>
+    <string name="article_title_intent">article_title_intent</string>
+    <string name="article_content_intent">article_content_intent</string>
+    <string name="article_img_intent">article_img_intent</string>
+    <string name="article_url_intent">article_url_intent</string>
 </resources>

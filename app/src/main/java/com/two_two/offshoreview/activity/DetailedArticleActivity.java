@@ -1,6 +1,7 @@
 package com.two_two.offshoreview.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.ShareActionProvider;
+import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -21,7 +24,10 @@ import com.two_two.offshoreview.volley.VolleySingleton;
 public class DetailedArticleActivity extends AppCompatActivity {
 
     private static final String TAG_LOG = DetailedArticleActivity.class.getSimpleName();
-    private String title, content, img, urlArticle;
+    private String title;
+    private String content;
+    private String img;
+    private String urlArticle;
     private NetworkImageView thumbNail;
     private ImageLoader imageLoader;
     private VolleySingleton volleySingleton;
@@ -32,22 +38,24 @@ public class DetailedArticleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.detailed_article);
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Статья");
+        getSupportActionBar().setTitle(getString(R.string.title_detail_activity));
 
 
         volleySingleton = VolleySingleton.getInstance();
         imageLoader = volleySingleton.getImageLoader();
 
         Intent intent = getIntent();
-        urlArticle = intent.getStringExtra("article_url");
-        title = intent.getStringExtra("article_title");
-        content = intent.getStringExtra("article_content");
-        img = intent.getStringExtra("article_img");
+        urlArticle = intent.getStringExtra(getString(R.string.article_url_intent));
+        title = intent.getStringExtra(getString(R.string.article_title_intent));
+        content = intent.getStringExtra(getString(R.string.article_content_intent));
+        img = intent.getStringExtra(getString(R.string.article_img_intent));
         img = img.replace("-150x150", "");
         thumbNail = (NetworkImageView) findViewById(R.id.detailedArticleImg);
         tvTitle = (TextView) findViewById(R.id.detailedArticleTitle);

@@ -16,7 +16,9 @@
         android:textSize="24dp"
         android:text="Large Text"
         android:id="@+id/detailedArticleTitle"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textStyle="bold"
+        android:padding="8dp" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -27,9 +29,12 @@
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/detailedArticleImg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginRight="8dp" />
+        android:layout_marginRight="8dp"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:scaleType="fitXY"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -38,7 +43,7 @@
         android:text="Medium Text"
         android:id="@+id/detailedArticleContent"
         android:layout_weight="1.03"
-        android:padding="5dp"
+        android:padding="8dp"
         android:textIsSelectable="true"/>
         </LinearLayout>
     </ScrollView>
