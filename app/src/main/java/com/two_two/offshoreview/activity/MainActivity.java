@@ -4,9 +4,13 @@ package com.two_two.offshoreview.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ProgressBar;
 
 import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.fragment.FragmentEmoneyView;
@@ -14,18 +18,9 @@ import com.two_two.offshoreview.fragment.FragmentOffshoreView;
 import com.two_two.offshoreview.fragment.FragmentVentureView;
 import com.two_two.offshoreview.fragment.NavigationDrawerFragment;
 
-import me.tatarka.support.job.JobScheduler;
-
-
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    //id of our JobSchedulerService
-    private static final int JOB_ID = 100;
-    //Run the JobSchedulerService every 2 minutes
-    private static final long POLL_FREQUENCY = 2880;
-    private JobScheduler jobScheduler;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +32,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragment).commit();
 
-
-        //setupStartService();
-
-
         //work for Toolbar
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
@@ -51,25 +42,8 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
     }
-//    private void setupStartService() {
-//        jobScheduler = JobScheduler.getInstance(this);
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                buildJob();
-//            }
-//        }, 3000);
-//    }
-//
-//    private void buildJob(){
-//        JobInfo.Builder builder = new JobInfo.Builder(JOB_ID, new ComponentName(this, MyLoadService.class));
-//        builder.setPeriodic(POLL_FREQUENCY)
-//                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
-//                .setPersisted(true);
-//        jobScheduler.schedule(builder.build());
-//    }
 
-    public void onSelectDrawerItem(int position){
+    public void onSelectDrawerItem(int position) {
         Fragment fragment = null;
         switch (position) {
             case 0:
@@ -83,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
-        if(fragment != null){
+        if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, fragment).commit();

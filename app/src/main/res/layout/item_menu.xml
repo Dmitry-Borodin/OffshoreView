@@ -1,44 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
 
-    android:padding="8dp" >
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <!-- Thumbnail Image -->
-    <com.android.volley.toolbox.NetworkImageView
-        android:id="@+id/articleImg"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginRight="8dp" />
-
-    <!-- Article Title -->
-    <TextView
-        android:id="@+id/articleTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/articleImg"
-        android:layout_toRightOf="@+id/articleImg"
-        android:textStyle="bold"
-        android:text="qwe"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvTestCategory"
-        android:text="qwe"
-        android:layout_toRightOf="@+id/articleImg"
-        android:layout_below="@+id/articleTitle"/>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_bg"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:padding="8dp">
+            <!-- Thumbnail Image -->
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/articleImg"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginRight="8dp" />
 
 
-    <!-- Article date -->
-    <TextView
-        android:id="@+id/articleDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="qwe"
-         />
+            <!-- Article Title -->
+            <TextView
+                android:id="@+id/articleTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/articleImg"
+                android:layout_toRightOf="@+id/articleImg"
+                android:textStyle="bold"
+                android:text="qwe"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvTestCategory"
+                android:text="qwe"
+                android:layout_toRightOf="@+id/articleImg"
+                android:layout_below="@+id/articleTitle"/>
 
-</RelativeLayout>
+
+
+
+            <!-- Article date -->
+            <TextView
+                android:id="@+id/articleDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:text="qwe"
+                />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

@@ -1,5 +1,7 @@
 package com.two_two.offshoreview.task;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.android.volley.RequestQueue;
@@ -14,12 +16,22 @@ public class TaskLoadArticlesOffshore extends AsyncTask<Void, Void, ArrayList<Ar
     private ArticleLoadListenerOffshore myComponent;
     private VolleySingleton volleySingleton;
     private RequestQueue requestQueue;
+    private Context context;
+    private ProgressDialog progressDialog;
 
-    public TaskLoadArticlesOffshore(ArticleLoadListenerOffshore myComponent){
+    public TaskLoadArticlesOffshore(ArticleLoadListenerOffshore myComponent, Context context){
+        this.context = context;
         this.myComponent = myComponent;
         volleySingleton = VolleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
     }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        progressDialog = ProgressDialog.show(context, "Подождите", "Идет загрузка...");
+    }
+
     @Override
     protected ArrayList<Article> doInBackground(Void... params) {
         ArrayList<Article> listArticles = ArticleUtils.loadListArticleOffshore(requestQueue);
@@ -30,6 +42,7 @@ public class TaskLoadArticlesOffshore extends AsyncTask<Void, Void, ArrayList<Ar
     protected void onPostExecute(ArrayList<Article> articles) {
         if(myComponent != null){
             myComponent.onArticleLoadListenerOffshore(articles);
+            progressDialog.hide();
         }
     }
 

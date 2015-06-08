@@ -1,5 +1,7 @@
 package com.two_two.offshoreview.task;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.android.volley.RequestQueue;
@@ -14,14 +16,21 @@ public class TaskLoadArticlesEmoney extends AsyncTask<Void, Void, ArrayList<Arti
     private ArticleLoadListenerEmoney myComponent;
     private VolleySingleton volleySingleton;
     private RequestQueue requestQueue;
+    private Context context;
+    private ProgressDialog progressDialog;
 
-    public TaskLoadArticlesEmoney(ArticleLoadListenerEmoney myComponent){
+    public TaskLoadArticlesEmoney(ArticleLoadListenerEmoney myComponent, Context context){
+        this.context = context;
         this.myComponent = myComponent;
         volleySingleton = VolleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
     }
 
-
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        progressDialog = ProgressDialog.show(context, "Подождите", "Идет загрузка...");
+    }
 
     @Override
     protected ArrayList<Article> doInBackground(Void... voids) {
@@ -33,6 +42,7 @@ public class TaskLoadArticlesEmoney extends AsyncTask<Void, Void, ArrayList<Arti
     protected void onPostExecute(ArrayList<Article> articles) {
         if(myComponent != null){
             myComponent.onArticleLoadListenerEmoney(articles);
+            progressDialog.hide();
         }
 
     }

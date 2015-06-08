@@ -5,15 +5,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.activity.DetailedArticleActivity;
-import com.two_two.offshoreview.adapter.CustomListAdapter;
+import com.two_two.offshoreview.adapter.CustomRecyclerAdapter;
+import com.two_two.offshoreview.adapter.RecyclerItemClickListenerArticle;
 import com.two_two.offshoreview.callbacks.ArticleLoadListenerVenture;
 import com.two_two.offshoreview.data.Article;
 import com.two_two.offshoreview.task.TaskLoadArticlesVenture;
@@ -27,8 +28,8 @@ public class FragmentVentureView extends Fragment implements ArticleLoadListener
     private static final String BLOG_NAME = "venture";
 
     private ArrayList<Article> listArticle = new ArrayList<>();
-    private CustomListAdapter adapter;
-    private ListView listViewArticleFragment;
+    private CustomRecyclerAdapter adapter;
+    private RecyclerView recyclerViewArticle;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     public FragmentVentureView(){
@@ -44,34 +45,39 @@ public class FragmentVentureView extends Fragment implements ArticleLoadListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tabs, container, false);
 
-        listViewArticleFragment = (ListView) rootView.findViewById(R.id.listArticleFragment);
-        adapter = new CustomListAdapter(getActivity(), listArticle);
-        listViewArticleFragment.setAdapter(adapter);
-
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefresh);
         swipeRefreshLayout.setOnRefreshListener(this);
+
+        recyclerViewArticle = (RecyclerView) rootView.findViewById(R.id.recyclerViewArticle);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerViewArticle.setLayoutManager(layoutManager);
+        adapter = new CustomRecyclerAdapter(getActivity(), listArticle);
+        recyclerViewArticle.setAdapter(adapter);
+
+        recyclerViewArticle.addOnItemTouchListener(new RecyclerItemClickListenerArticle(getActivity(),
+                new RecyclerItemClickListenerArticle.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent = new Intent(getActivity(), DetailedArticleActivity.class);
+                        intent.putExtra(getString(R.string.article_title_intent), adapter.getItem(position).getTitle());
+                        intent.putExtra(getString(R.string.article_content_intent), adapter.getItem(position).getContent());
+                        intent.putExtra(getString(R.string.article_url_intent), adapter.getItem(position).getUrlArticle());
+                        intent.putExtra(getString(R.string.article_img_intent), adapter.getItem(position).getThumbnailUrl());
+                        startActivity(intent);
+                    }
+                }));
+
 
         if(savedInstanceState!=null){
             listArticle = savedInstanceState.getParcelableArrayList(STATE_ARTICLES);
         } else {
             listArticle = MyApplication.getWritableDatabase().getArticleWithDataBase(BLOG_NAME);
             if(listArticle.isEmpty()){
-                new TaskLoadArticlesVenture(this).execute();
+                new TaskLoadArticlesVenture(this, getActivity()).execute();
             }
         }
         adapter.setArticleList(listArticle);
 
-        listViewArticleFragment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), DetailedArticleActivity.class);
-                intent.putExtra(getString(R.string.article_title_intent), adapter.getItem(position).getTitle());
-                intent.putExtra(getString(R.string.article_content_intent), adapter.getItem(position).getContent());
-                intent.putExtra(getString(R.string.article_url_intent), adapter.getItem(position).getUrlArticle());
-                intent.putExtra(getString(R.string.article_img_intent), adapter.getItem(position).getThumbnailUrl());
-                startActivity(intent);
-            }
-        });
 
         return rootView;
     }
@@ -98,6 +104,6 @@ public class FragmentVentureView extends Fragment implements ArticleLoadListener
 
     @Override
     public void onRefresh() {
-        new TaskLoadArticlesVenture(this).execute();
+        new TaskLoadArticlesVenture(this, getActivity()).execute();
     }
 }

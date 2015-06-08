@@ -6,15 +6,17 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.activity.DetailedArticleActivity;
-import com.two_two.offshoreview.adapter.CustomListAdapter;
+import com.two_two.offshoreview.adapter.CustomRecyclerAdapter;
+import com.two_two.offshoreview.adapter.RecyclerItemClickListenerArticle;
 import com.two_two.offshoreview.callbacks.ArticleLoadListenerOffshore;
 import com.two_two.offshoreview.data.Article;
 import com.two_two.offshoreview.task.TaskLoadArticlesOffshore;
@@ -28,8 +30,8 @@ public class FragmentOffshoreView extends Fragment implements ArticleLoadListene
     private static final String BLOG_NAME = "offshore";
 
     private ArrayList<Article> listArticle = new ArrayList<>();
-    private CustomListAdapter adapter;
-    private ListView listViewArticleFragment;
+    private CustomRecyclerAdapter adapter;
+    private RecyclerView recyclerViewArticle;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     public FragmentOffshoreView(){
@@ -47,31 +49,36 @@ public class FragmentOffshoreView extends Fragment implements ArticleLoadListene
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefresh);
         swipeRefreshLayout.setOnRefreshListener(this);
 
-        listViewArticleFragment = (ListView) rootView.findViewById(R.id.listArticleFragment);
-        adapter = new CustomListAdapter(getActivity(), listArticle);
-        listViewArticleFragment.setAdapter(adapter);
+        recyclerViewArticle = (RecyclerView) rootView.findViewById(R.id.recyclerViewArticle);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerViewArticle.setLayoutManager(layoutManager);
+        adapter = new CustomRecyclerAdapter(getActivity(), listArticle);
+        recyclerViewArticle.setAdapter(adapter);
+
+        recyclerViewArticle.addOnItemTouchListener(new RecyclerItemClickListenerArticle(getActivity(),
+                new RecyclerItemClickListenerArticle.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent = new Intent(getActivity(), DetailedArticleActivity.class);
+                        intent.putExtra(getString(R.string.article_title_intent), adapter.getItem(position).getTitle());
+                        intent.putExtra(getString(R.string.article_content_intent), adapter.getItem(position).getContent());
+                        intent.putExtra(getString(R.string.article_url_intent), adapter.getItem(position).getUrlArticle());
+                        intent.putExtra(getString(R.string.article_img_intent), adapter.getItem(position).getThumbnailUrl());
+                        startActivity(intent);
+                    }
+                }));
+
 
         if(savedInstanceState!=null){
             listArticle = savedInstanceState.getParcelableArrayList(STATE_ARTICLES);
         } else {
             listArticle = MyApplication.getWritableDatabase().getArticleWithDataBase(BLOG_NAME);
             if(listArticle.isEmpty()){
-                new TaskLoadArticlesOffshore(this).execute();
+                new TaskLoadArticlesOffshore(this, getActivity()).execute();
             }
         }
         adapter.setArticleList(listArticle);
 
-        listViewArticleFragment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), DetailedArticleActivity.class);
-                intent.putExtra(getString(R.string.article_title_intent), adapter.getItem(position).getTitle());
-                intent.putExtra(getString(R.string.article_content_intent), adapter.getItem(position).getContent());
-                intent.putExtra(getString(R.string.article_img_intent), adapter.getItem(position).getThumbnailUrl());
-                intent.putExtra(getString(R.string.article_url_intent), adapter.getItem(position).getUrlArticle());
-                startActivity(intent);
-            }
-        });
 
         return rootView;
     }
@@ -98,6 +105,6 @@ public class FragmentOffshoreView extends Fragment implements ArticleLoadListene
 
     @Override
     public void onRefresh() {
-        new TaskLoadArticlesOffshore(this).execute();
+        new TaskLoadArticlesOffshore(this, getActivity()).execute();
     }
 }

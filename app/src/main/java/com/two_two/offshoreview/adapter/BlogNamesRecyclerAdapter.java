@@ -17,9 +17,9 @@ public class BlogNamesRecyclerAdapter extends
         RecyclerView.Adapter<BlogNamesRecyclerAdapter.MyViewHolder> {
 
 
-    Context context;
+    private Context context;
     private final LayoutInflater inflater;
-    List<BlogNames> blogNames = Collections.emptyList();
+    private List<BlogNames> blogNames = Collections.emptyList();
 
     public BlogNamesRecyclerAdapter(Context context, List<BlogNames> blogNames) {
         inflater = LayoutInflater.from(context);
