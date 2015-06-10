@@ -1,20 +1,28 @@
 <resources>
-<!-- Base application theme. -->
-    <style name="AppTheme" parent="AppTheme.Base">
-    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="AppTheme.Base"/>
+    <!-- Base application theme. -->
+
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
-            <item name="colorPrimary">@color/primaryColor</item>
-            <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-           <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="textAppearanceLargePopupMenu">@style/MyShareActionProviderStyle</item>
         <item name="textAppearanceSmallPopupMenu">@style/MyShareActionProviderStyle</item>
-       </style>
-       <style name="MyCustomToolBarTheme" parent="ThemeOverlay.AppCompat.Light">
-            <item name="android:textColorPrimary">#FFFFFF</item>
-            <item name="android:textColorSecondary">#FFFFFF</item>
+    </style>
 
-        </style>
-       <style name="MyShareActionProviderStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle">
+    <!-- theme to action bar -->
+    <style name="MyCustomToolBarTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textColorSecondary">#FFFFFF</item>
+        <!-- Style action mod in actionbar -->
+        <item name="windowActionModeOverlay">true</item>
+        <item name="actionModeBackground">@drawable/myapp_action_mode_background</item>
+
+    </style>
+    <!-- theme to ShareActionProvider -->
+    <style name="MyShareActionProviderStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle">
         <item name="android:textColor">#ff000000</item>
     </style>
-    </resources>
+</resources>

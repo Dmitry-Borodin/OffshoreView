@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.android.volley.RequestQueue;
+import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.callbacks.ArticleLoadListenerEmoney;
 import com.two_two.offshoreview.callbacks.ArticleUtils;
 import com.two_two.offshoreview.data.Article;
@@ -29,7 +30,8 @@ public class TaskLoadArticlesEmoney extends AsyncTask<Void, Void, ArrayList<Arti
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog = ProgressDialog.show(context, "Подождите", "Идет загрузка...");
+        progressDialog = ProgressDialog.show(context, context.getString(R.string.progress_bar_title),
+                context.getString(R.string.progress_bar_content));
     }
 
     @Override

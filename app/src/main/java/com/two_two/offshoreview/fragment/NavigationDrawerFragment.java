@@ -42,6 +42,8 @@ public class NavigationDrawerFragment extends Fragment {
 
     private boolean mUserLearnedDrawer;
     private boolean mFromSavedInstanceState;
+    private static  String[] titles;
+
 
     public NavigationDrawerFragment() {
         // Required empty public constructor
@@ -54,6 +56,7 @@ public class NavigationDrawerFragment extends Fragment {
         if(savedInstanceState !=null){
             mFromSavedInstanceState = true;
         }
+        titles = getResources().getStringArray(R.array.drawer_fragment_array);
     }
 
 
@@ -103,7 +106,6 @@ public class NavigationDrawerFragment extends Fragment {
     public static List<BlogNames> getBlogNames() {
         List<BlogNames> blogNames = new ArrayList<>();
         int [] icons = {R.drawable.ic_ov, R.drawable.ic_ev, R.drawable.ic_vv};
-        String[] titles = {"Международный бизнес", "Электронная коммерция", "Инвестиции и стартапы"};
         for (int i = 0; i < titles.length && i < icons.length; i++) {
             BlogNames current = new BlogNames();
             current.setIconId(icons[i]);

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+xmlns:ads="http://schemas.android.com/apk/res-auto"
 android:layout_height="match_parent"
 tools:context=".MainActivity"
 android:orientation="vertical">
+
 <android.support.v4.widget.SwipeRefreshLayout
     android:id="@+id/swipeRefresh"
     android:layout_height="match_parent"
@@ -12,13 +14,16 @@ android:orientation="vertical">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recyclerViewArticle"
-        />
-    <TextView
-        android:id="@+id/empty_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:visibility="gone"
-        android:text="Error" />
+        android:paddingBottom="35dp"/>
+
 </android.support.v4.widget.SwipeRefreshLayout>
-</LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adUnitId="ca-app-pub-9894693655868902/4872979673"
+        ads:adSize="BANNER"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>
