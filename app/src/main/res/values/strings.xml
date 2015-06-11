@@ -8,14 +8,14 @@
     <string name="drawer_close">Close</string>
     <string-array name="drawer_fragment_array">
         <item>Международный бизнес</item>
-        <item>Инвестиции и стартапы</item>
         <item>Электронная коммерция</item>
+        <item>Инвестиции и стартапы</item>
     </string-array>
 
     <!-- name fragment -->
     <string name="name_fragment_offshore">Международный бизнес</string>
-    <string name="name_fragment_venture">Инвестиции и стартапы</string>
     <string name="name_fragment_emoney">Электронная коммерция</string>
+    <string name="name_fragment_venture">Инвестиции и стартапы</string>
 
     <!-- title detail activity -->
     <string name="title_detail_activity">Статья</string>

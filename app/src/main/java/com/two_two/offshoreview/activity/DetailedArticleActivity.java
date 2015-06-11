@@ -40,12 +40,13 @@ public class DetailedArticleActivity extends AppCompatActivity {
         setContentView(R.layout.detailed_article);
 
         // Поиск AdView как ресурса и отправка запроса.
-        AdView adView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-//        AdRequest adRequest =new AdRequest.Builder()
+        //        AdRequest adRequest =new AdRequest.Builder()
 //                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
 //                .addTestDevice("4AFAB49B325A51658D3BAFEBC62D6D43").build();
+        AdView adView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
