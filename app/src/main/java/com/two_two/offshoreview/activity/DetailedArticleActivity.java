@@ -38,14 +38,14 @@ public class DetailedArticleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detailed_article);
-
-        // Поиск AdView как ресурса и отправка запроса.
-        //        AdRequest adRequest =new AdRequest.Builder()
-//                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-//                .addTestDevice("4AFAB49B325A51658D3BAFEBC62D6D43").build();
         AdView adView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
+        // Поиск AdView как ресурса и отправка запроса.
+//                AdRequest adRequest =new AdRequest.Builder()
+//                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                .addTestDevice("312D074FC3BA625F8AAF2277E76888D0").build();
+
+       AdRequest adRequest = new AdRequest.Builder().build();
+       adView.loadAd(adRequest);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);

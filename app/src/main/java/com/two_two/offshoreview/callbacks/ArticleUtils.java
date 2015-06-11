@@ -29,4 +29,10 @@ public class ArticleUtils {
         MyApplication.getWritableDatabase().insertArticlesInDataBase(listArticles, true, "emoney");
         return listArticles;
     }
+    public static ArrayList<Article> loadListArticleCatalog(RequestQueue requestQueue){
+        JSONObject response = Requestor.sendJsonRequest(requestQueue, "http://catalog.offshoreview.eu/api/get_recent_posts/?json=1&json_unescaped_unicode=1&count=10");
+        ArrayList<Article> listArticles = Parser.parseJSONResponse(response);
+        MyApplication.getWritableDatabase().insertArticlesInDataBase(listArticles, true, "catalog");
+        return listArticles;
+    }
 }

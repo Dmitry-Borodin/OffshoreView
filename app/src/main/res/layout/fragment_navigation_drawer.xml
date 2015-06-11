@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context="ua.com.marazmproject.projectbiznesblog.NavigationDrawerFragment">
+    tools:context="com.two_two.offshoreview.fragment.NavigationDrawerFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -24,7 +24,11 @@
         android:layout_below="@+id/containerDrawerImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
     </android.support.v7.widget.RecyclerView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ff000000"
+        android:layout_below="@id/drawerList"/>
 
 </RelativeLayout>

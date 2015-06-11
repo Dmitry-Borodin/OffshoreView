@@ -11,34 +11,33 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.activity.DetailedArticleActivity;
 import com.two_two.offshoreview.adapter.CustomRecyclerAdapter;
 import com.two_two.offshoreview.adapter.RecyclerItemClickListenerArticle;
+import com.two_two.offshoreview.callbacks.ArticleLoadListenerCatalog;
 import com.two_two.offshoreview.callbacks.ArticleLoadListenerOffshore;
 import com.two_two.offshoreview.data.Article;
+import com.two_two.offshoreview.task.TaskLoadArticlesCatalog;
 import com.two_two.offshoreview.task.TaskLoadArticlesOffshore;
 import com.two_two.offshoreview.volley.MyApplication;
 
 import java.util.ArrayList;
 
-public class FragmentOffshoreView extends Fragment implements ArticleLoadListenerOffshore, SwipeRefreshLayout.OnRefreshListener {
+public class FragmentCatalogCompany extends Fragment implements ArticleLoadListenerCatalog, SwipeRefreshLayout.OnRefreshListener {
 
-    private static final String STATE_ARTICLES = "com.two_two.offshoreview.articles_state_offshore";
-    private static final String BLOG_NAME = "offshore";
+    private static final String STATE_ARTICLES = "com.two_two.offshoreview.articles_state_catalog";
+    private static final String BLOG_NAME = "catalog";
 
     private ArrayList<Article> listArticle = new ArrayList<>();
     private CustomRecyclerAdapter adapter;
     private RecyclerView recyclerViewArticle;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    public FragmentOffshoreView(){
+    public FragmentCatalogCompany(){
 
     }
 
@@ -60,7 +59,6 @@ public class FragmentOffshoreView extends Fragment implements ArticleLoadListene
 
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
-
 
 
 
@@ -92,7 +90,7 @@ public class FragmentOffshoreView extends Fragment implements ArticleLoadListene
         } else {
             listArticle = MyApplication.getWritableDatabase().getArticleWithDataBase(BLOG_NAME);
             if(listArticle.isEmpty()){
-                new TaskLoadArticlesOffshore(this, getActivity()).execute();
+                new TaskLoadArticlesCatalog(this, getActivity()).execute();
             }
         }
         adapter.setArticleList(listArticle);
@@ -110,11 +108,11 @@ public class FragmentOffshoreView extends Fragment implements ArticleLoadListene
     @Override
     public void onResume() {
         super.onResume();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.name_fragment_offshore);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.name_fragment_catalog);
     }
 
     @Override
-    public void onArticleLoadListenerOffshore(ArrayList<Article> listArticles) {
+    public void onArticleLoadListenerCatalog(ArrayList<Article> listArticles) {
         if(swipeRefreshLayout.isRefreshing()){
             swipeRefreshLayout.setRefreshing(false);
         }
@@ -123,6 +121,6 @@ public class FragmentOffshoreView extends Fragment implements ArticleLoadListene
 
     @Override
     public void onRefresh() {
-        new TaskLoadArticlesOffshore(this, getActivity()).execute();
+        new TaskLoadArticlesCatalog(this, getActivity()).execute();
     }
 }

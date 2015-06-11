@@ -8,8 +8,8 @@ android {
         applicationId "com.two_two.offshoreview"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 8
-        versionName "1.2.6"
+        versionCode 10
+        versionName "1.3.0"
     }
     buildTypes {
         release {

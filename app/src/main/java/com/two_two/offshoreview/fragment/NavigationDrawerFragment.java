@@ -85,6 +85,12 @@ public class NavigationDrawerFragment extends Fragment {
                             case 2:
                                 showFragment(position);
                                 break;
+                            case 3:
+                                showFragment(position);
+                                break;
+                            case 4:
+                                showFragment(position);
+                                break;
                             default:
                                 break;
                         }
@@ -105,7 +111,9 @@ public class NavigationDrawerFragment extends Fragment {
 
     public static List<BlogNames> getBlogNames() {
         List<BlogNames> blogNames = new ArrayList<>();
-        int [] icons = {R.drawable.ic_ov, R.drawable.ic_ev, R.drawable.ic_vv};
+        int [] icons = {R.drawable.logo_view, R.drawable.ic_ev,
+                R.drawable.ic_vv, R.drawable.ic_ov,
+                R.drawable.info};
         for (int i = 0; i < titles.length && i < icons.length; i++) {
             BlogNames current = new BlogNames();
             current.setIconId(icons[i]);

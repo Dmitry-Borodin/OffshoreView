@@ -27,6 +27,8 @@ public class DBArticles {
                 deleteTable(blogName);
             } else if (blogName.equals("venture")){
                 deleteTable(blogName);
+            } else if (blogName.equals("catalog")){
+                deleteTable(blogName);
             } else {
                 deleteTable(blogName);
             }
@@ -36,6 +38,8 @@ public class DBArticles {
             dataBase = ArticleHelper.OFFSHORE_TABLE;
         } else if (blogName.equals("venture")){
             dataBase = ArticleHelper.VENTURE_TABLE;
+        } else if (blogName.equals("catalog")){
+            dataBase = ArticleHelper.CATALOG_TABLE;
         } else {
             dataBase = ArticleHelper.EMONEY_TABLE;
         }
@@ -66,6 +70,8 @@ public class DBArticles {
             dataBase = ArticleHelper.OFFSHORE_TABLE;
         } else if (blogName.equals("venture")) {
             dataBase = ArticleHelper.VENTURE_TABLE;
+        } else if (blogName.equals("catalog")) {
+            dataBase = ArticleHelper.CATALOG_TABLE;
         } else {
             dataBase = ArticleHelper.EMONEY_TABLE;
         }
@@ -104,7 +110,9 @@ public class DBArticles {
             mDatabase.delete(ArticleHelper.OFFSHORE_TABLE, null, null);
         } else if(table.equals("venture")){
             mDatabase.delete(ArticleHelper.VENTURE_TABLE, null, null);
-        } else {
+        } else if(table.equals("catalog")){
+            mDatabase.delete(ArticleHelper.CATALOG_TABLE, null, null);
+        }else {
             mDatabase.delete(ArticleHelper.EMONEY_TABLE, null, null);
         }
     }
@@ -113,10 +121,11 @@ public class DBArticles {
         private static final String TAG = "com.marazmone.DataBase";
 
         private static  final String DATABASE_NAME = "offshore_view_articles.db";
-        private static final int DATABASE_VERSION = 3;                             //hardcoded version
+        private static final int DATABASE_VERSION = 4;                             //hardcoded version
         public static final String OFFSHORE_TABLE = "offshore_view";
         public static final String VENTURE_TABLE = "venture_view";
         public static final String EMONEY_TABLE = "emoney_view";
+        public static final String CATALOG_TABLE = "catalog_view";
         public static final String ID = "_id";
         public static final String ARTICLE_ID = "article_id";
         public static final String ARTICLE_TITLE = "title";
@@ -153,24 +162,20 @@ public class DBArticles {
                 + ARTICLE_DATE + " TEXT,"
                 + ARTICLE_IMG + " TEXT,"
                 + ARTICLE_URL + " TEXT);";
+        private static final String SQL_CREATE_CATALOG = "CREATE TABLE "+ CATALOG_TABLE + " ("
+                + ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + ARTICLE_ID + " LONG,"
+                + ARTICLE_TITLE + " TEXT,"
+                + ARTICLE_CONTENT + " TEXT,"
+                + ARTICLE_CATEGORY + " TEXT,"
+                + ARTICLE_DATE + " TEXT,"
+                + ARTICLE_IMG + " TEXT,"
+                + ARTICLE_URL + " TEXT);";
 
         private static final String SQL_DELETE_OFFSHORE = "DROP TABLE IF EXISTS " + OFFSHORE_TABLE;
         private static final String SQL_DELETE_VENTURE = "DROP TABLE IF EXISTS " + VENTURE_TABLE;
         private static final String SQL_DELETE_EMONEY = "DROP TABLE IF EXISTS " + EMONEY_TABLE;
-
-        /* ---- START update dataBase ver.2 ---- */
-        private static final String SQL_ALTER_COLUMN_OFFSHORE = "ALTER TABLE " + OFFSHORE_TABLE
-                + " ADD COLUMN " + ARTICLE_URL
-                + " TEXT;";
-
-        private static final String SQL_ALTER_COLUMN_VENTURE = "ALTER TABLE " + VENTURE_TABLE
-                + " ADD COLUMN " + ARTICLE_URL
-                + " TEXT;";
-
-        private static final String SQL_ALTER_COLUMN_EMONEY = "ALTER TABLE " + EMONEY_TABLE
-                + " ADD COLUMN " + ARTICLE_URL
-                + " TEXT;";
-
+        private static final String SQL_DELETE_CATALOG = "DROP TABLE IF EXISTS " + CATALOG_TABLE;
 
         public ArticleHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -181,6 +186,7 @@ public class DBArticles {
             db.execSQL(SQL_CREATE_OFFSHORE);
             db.execSQL(SQL_CREATE_VENTURE);
             db.execSQL(SQL_CREATE_EMONEY);
+            db.execSQL(SQL_CREATE_CATALOG);
         }
 
 
@@ -192,6 +198,7 @@ public class DBArticles {
             db.execSQL(SQL_DELETE_OFFSHORE);
             db.execSQL(SQL_DELETE_VENTURE);
             db.execSQL(SQL_DELETE_EMONEY);
+            db.execSQL(SQL_DELETE_CATALOG);
 
             onCreate(db);
         }

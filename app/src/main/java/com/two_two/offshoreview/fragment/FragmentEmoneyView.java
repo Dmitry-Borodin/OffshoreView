@@ -49,10 +49,15 @@ public class FragmentEmoneyView extends Fragment implements ArticleLoadListenerE
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tabs, container, false);
 
-        // Поиск AdView как ресурса и отправка запроса.
         AdView adView = (AdView) rootView.findViewById(R.id.adView);
+        // Поиск AdView как ресурса и отправка запроса.
+//        AdRequest adRequest =new AdRequest.Builder()
+//                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                .addTestDevice("312D074FC3BA625F8AAF2277E76888D0").build();
+
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
+
 
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefresh);
         swipeRefreshLayout.setOnRefreshListener(this);

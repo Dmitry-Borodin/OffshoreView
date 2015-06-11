@@ -10,7 +10,9 @@ import android.support.v7.widget.Toolbar;
 
 import com.google.android.gms.ads.AdView;
 import com.two_two.offshoreview.R;
+import com.two_two.offshoreview.fragment.FragmentCatalogCompany;
 import com.two_two.offshoreview.fragment.FragmentEmoneyView;
+import com.two_two.offshoreview.fragment.FragmentInformation;
 import com.two_two.offshoreview.fragment.FragmentOffshoreView;
 import com.two_two.offshoreview.fragment.FragmentVentureView;
 import com.two_two.offshoreview.fragment.NavigationDrawerFragment;
@@ -51,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 2:
                 fragment = new FragmentVentureView();
+                break;
+            case 3:
+                fragment = new FragmentCatalogCompany();
+                break;
+            case 4:
+                fragment = new FragmentInformation();
+                break;
             default:
                 break;
         }

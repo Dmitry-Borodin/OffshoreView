@@ -14,7 +14,7 @@ android:orientation="vertical">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recyclerViewArticle"
-        android:paddingBottom="35dp"/>
+        android:paddingBottom="@dimen/padding_bottom_admob"/>
 
 </android.support.v4.widget.SwipeRefreshLayout>
 
@@ -22,8 +22,8 @@ android:orientation="vertical">
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        ads:adUnitId="ca-app-pub-9894693655868902/4872979673"
-        ads:adSize="BANNER"
+        ads:adUnitId="@string/ad_mob_banner_fragment"
+        ads:adSize="SMART_BANNER"
         android:layout_alignParentBottom="true"
         />
 </RelativeLayout>
