@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.google.android.gms.ads.AdView;
+import com.parse.Parse;
+import com.parse.ParseInstallation;
 import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.fragment.FragmentCatalogCompany;
 import com.two_two.offshoreview.fragment.FragmentEmoneyView;

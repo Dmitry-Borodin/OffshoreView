@@ -41,6 +41,7 @@ public class FragmentVentureView extends Fragment implements ArticleLoadListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        new TaskLoadArticlesVenture(this, getActivity()).execute();
     }
 
     @Override

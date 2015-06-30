@@ -18,6 +18,14 @@ android:orientation="vertical">
 
 </android.support.v4.widget.SwipeRefreshLayout>
 
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="Пошло что-то не так" />
+
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="match_parent"

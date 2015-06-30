@@ -44,8 +44,7 @@ public class FragmentCatalogCompany extends Fragment implements ArticleLoadListe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
+        new TaskLoadArticlesCatalog(this, getActivity()).execute();
     }
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -42,6 +42,7 @@ public class FragmentEmoneyView extends Fragment implements ArticleLoadListenerE
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        new TaskLoadArticlesEmoney(this, getActivity()).execute();
     }
 
 

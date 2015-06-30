@@ -11,11 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
+
 import com.google.android.gms.ads.AdView;
 import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.activity.DetailedArticleActivity;
@@ -45,8 +42,7 @@ public class FragmentOffshoreView extends Fragment implements ArticleLoadListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
+            new TaskLoadArticlesOffshore(this, getActivity()).execute();
     }
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -96,7 +92,6 @@ public class FragmentOffshoreView extends Fragment implements ArticleLoadListene
             }
         }
         adapter.setArticleList(listArticle);
-
 
         return rootView;
     }
