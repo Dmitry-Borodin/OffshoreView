@@ -42,7 +42,7 @@ public class FragmentEmoneyView extends Fragment implements ArticleLoadListenerE
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new TaskLoadArticlesEmoney(this, getActivity()).execute();
+        new TaskLoadArticlesEmoney(this, getActivity(), true).execute();
     }
 
 
@@ -51,17 +51,13 @@ public class FragmentEmoneyView extends Fragment implements ArticleLoadListenerE
         View rootView = inflater.inflate(R.layout.fragment_tabs, container, false);
 
         AdView adView = (AdView) rootView.findViewById(R.id.adView);
-        // Поиск AdView как ресурса и отправка запроса.
-//        AdRequest adRequest =new AdRequest.Builder()
-//                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-//                .addTestDevice("312D074FC3BA625F8AAF2277E76888D0").build();
-
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
 
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefresh);
         swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getIntArray(R.array.swipeRefreshColors));
 
         recyclerViewArticle = (RecyclerView) rootView.findViewById(R.id.recyclerViewArticle);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -88,7 +84,7 @@ public class FragmentEmoneyView extends Fragment implements ArticleLoadListenerE
         } else {
             listArticle = MyApplication.getWritableDatabase().getArticleWithDataBase(BLOG_NAME);
             if(listArticle.isEmpty()){
-                new TaskLoadArticlesEmoney(this, getActivity()).execute();
+                new TaskLoadArticlesEmoney(this, getActivity(), true).execute();
             }
         }
         adapter.setArticleList(listArticle);
@@ -114,6 +110,6 @@ public class FragmentEmoneyView extends Fragment implements ArticleLoadListenerE
 
     @Override
     public void onRefresh() {
-        new TaskLoadArticlesEmoney(this, getActivity()).execute();
+        new TaskLoadArticlesEmoney(this, getActivity(), false).execute();
     }
 }

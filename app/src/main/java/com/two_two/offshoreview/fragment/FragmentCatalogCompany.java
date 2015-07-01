@@ -44,18 +44,13 @@ public class FragmentCatalogCompany extends Fragment implements ArticleLoadListe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new TaskLoadArticlesCatalog(this, getActivity()).execute();
+        new TaskLoadArticlesCatalog(this, getActivity(), true).execute();
     }
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tabs, container, false);
 
         AdView adView = (AdView) rootView.findViewById(R.id.adView);
-        // Поиск AdView как ресурса и отправка запроса.
-//        AdRequest adRequest =new AdRequest.Builder()
-//                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-//                .addTestDevice("312D074FC3BA625F8AAF2277E76888D0").build();
-
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
@@ -63,6 +58,7 @@ public class FragmentCatalogCompany extends Fragment implements ArticleLoadListe
 
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefresh);
         swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getIntArray(R.array.swipeRefreshColors));
 
         recyclerViewArticle = (RecyclerView) rootView.findViewById(R.id.recyclerViewArticle);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -89,7 +85,7 @@ public class FragmentCatalogCompany extends Fragment implements ArticleLoadListe
         } else {
             listArticle = MyApplication.getWritableDatabase().getArticleWithDataBase(BLOG_NAME);
             if(listArticle.isEmpty()){
-                new TaskLoadArticlesCatalog(this, getActivity()).execute();
+                new TaskLoadArticlesCatalog(this, getActivity(), true).execute();
             }
         }
         adapter.setArticleList(listArticle);
@@ -120,6 +116,6 @@ public class FragmentCatalogCompany extends Fragment implements ArticleLoadListe
 
     @Override
     public void onRefresh() {
-        new TaskLoadArticlesCatalog(this, getActivity()).execute();
+        new TaskLoadArticlesCatalog(this, getActivity(), false).execute();
     }
 }

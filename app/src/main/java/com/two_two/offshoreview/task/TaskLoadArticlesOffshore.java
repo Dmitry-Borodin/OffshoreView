@@ -19,8 +19,11 @@ public class TaskLoadArticlesOffshore extends AsyncTask<Void, Void, ArrayList<Ar
     private RequestQueue requestQueue;
     private Context context;
     private ProgressDialog progressDialog;
+    private boolean loadDialog;
 
-    public TaskLoadArticlesOffshore(ArticleLoadListenerOffshore myComponent, Context context){
+    public TaskLoadArticlesOffshore(ArticleLoadListenerOffshore myComponent, Context context,
+                                    boolean loadDialog){
+        this.loadDialog = loadDialog;
         this.context = context;
         this.myComponent = myComponent;
         volleySingleton = VolleySingleton.getInstance();
@@ -30,8 +33,10 @@ public class TaskLoadArticlesOffshore extends AsyncTask<Void, Void, ArrayList<Ar
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog = ProgressDialog.show(context, context.getString(R.string.progress_bar_title),
-                context.getString(R.string.progress_bar_content));
+        if (loadDialog){
+            progressDialog = ProgressDialog.show(context, context.getString(R.string.progress_bar_title),
+                    context.getString(R.string.progress_bar_content));
+        }
     }
 
     @Override
@@ -44,7 +49,9 @@ public class TaskLoadArticlesOffshore extends AsyncTask<Void, Void, ArrayList<Ar
     protected void onPostExecute(ArrayList<Article> articles) {
         if(myComponent != null){
             myComponent.onArticleLoadListenerOffshore(articles);
-            progressDialog.hide();
+            if(loadDialog){
+                progressDialog.hide();
+            }
         }
     }
 

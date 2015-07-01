@@ -14,6 +14,11 @@
         <item>О проекте</item>
     </string-array>
 
+    <string-array name="swipeRefreshColors">
+        <item>@color/primaryColor</item>
+        <item>@color/colorPrimaryDark</item>
+    </string-array>
+
     <!-- name fragment -->
     <string name="name_fragment_offshore">Международный бизнес</string>
     <string name="name_fragment_emoney">Электронная коммерция</string>

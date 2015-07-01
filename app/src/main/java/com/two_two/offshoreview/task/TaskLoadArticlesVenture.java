@@ -19,8 +19,11 @@ public class TaskLoadArticlesVenture extends AsyncTask<Void, Void, ArrayList<Art
     private RequestQueue requestQueue;
     private Context context;
     private ProgressDialog progressDialog;
+    private boolean loadDialog;
 
-    public TaskLoadArticlesVenture(ArticleLoadListenerVenture myComponent, Context context){
+    public TaskLoadArticlesVenture(ArticleLoadListenerVenture myComponent, Context context,
+                                   boolean loadDialog){
+        this.loadDialog = loadDialog;
         this.context = context;
         this.myComponent = myComponent;
         volleySingleton = VolleySingleton.getInstance();
@@ -30,8 +33,11 @@ public class TaskLoadArticlesVenture extends AsyncTask<Void, Void, ArrayList<Art
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog = ProgressDialog.show(context, context.getString(R.string.progress_bar_title),
-                context.getString(R.string.progress_bar_content));
+        if (loadDialog){
+            progressDialog = ProgressDialog.show(context, context.getString(R.string.progress_bar_title),
+                    context.getString(R.string.progress_bar_content));
+        }
+
     }
 
     @Override
@@ -44,7 +50,9 @@ public class TaskLoadArticlesVenture extends AsyncTask<Void, Void, ArrayList<Art
     protected void onPostExecute(ArrayList<Article> articles) {
         if(myComponent != null){
             myComponent.onArticleLoadListenerVenture(articles);
-            progressDialog.hide();
+            if (loadDialog) {
+                progressDialog.hide();
+            }
         }
     }
 }

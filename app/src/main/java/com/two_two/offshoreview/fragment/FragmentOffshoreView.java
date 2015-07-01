@@ -42,18 +42,13 @@ public class FragmentOffshoreView extends Fragment implements ArticleLoadListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-            new TaskLoadArticlesOffshore(this, getActivity()).execute();
+            new TaskLoadArticlesOffshore(this, getActivity(), true).execute();
     }
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tabs, container, false);
 
         AdView adView = (AdView) rootView.findViewById(R.id.adView);
-        // Поиск AdView как ресурса и отправка запроса.
-//        AdRequest adRequest =new AdRequest.Builder()
-//                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-//                .addTestDevice("312D074FC3BA625F8AAF2277E76888D0").build();
-
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
@@ -61,7 +56,9 @@ public class FragmentOffshoreView extends Fragment implements ArticleLoadListene
 
 
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefresh);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getIntArray(R.array.swipeRefreshColors));
         swipeRefreshLayout.setOnRefreshListener(this);
+
 
         recyclerViewArticle = (RecyclerView) rootView.findViewById(R.id.recyclerViewArticle);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -88,7 +85,7 @@ public class FragmentOffshoreView extends Fragment implements ArticleLoadListene
         } else {
             listArticle = MyApplication.getWritableDatabase().getArticleWithDataBase(BLOG_NAME);
             if(listArticle.isEmpty()){
-                new TaskLoadArticlesOffshore(this, getActivity()).execute();
+                new TaskLoadArticlesOffshore(this, getActivity(), true).execute();
             }
         }
         adapter.setArticleList(listArticle);
@@ -118,6 +115,6 @@ public class FragmentOffshoreView extends Fragment implements ArticleLoadListene
 
     @Override
     public void onRefresh() {
-        new TaskLoadArticlesOffshore(this, getActivity()).execute();
+        new TaskLoadArticlesOffshore(this, getActivity(), false).execute();
     }
 }
