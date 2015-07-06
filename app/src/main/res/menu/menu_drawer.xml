@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/drawer_group_1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_item_1"
+            android:icon="@drawable/ic_ov"
+            android:title="@string/name_fragment_offshore" />
+        <item
+            android:id="@+id/navigation_item_2"
+            android:icon="@drawable/ic_ev"
+            android:title="@string/name_fragment_emoney" />
+        <item
+            android:id="@+id/navigation_item_3"
+            android:icon="@drawable/ic_vv"
+            android:title="@string/name_fragment_venture" />
+        <item
+            android:id="@+id/navigation_item_4"
+            android:icon="@drawable/ic_list_1"
+            android:title="@string/name_fragment_catalog" />
+        <item
+            android:id="@+id/navigation_item_5"
+            android:icon="@drawable/info"
+            android:title="@string/name_fragment_info" />
+    </group>
+</menu>

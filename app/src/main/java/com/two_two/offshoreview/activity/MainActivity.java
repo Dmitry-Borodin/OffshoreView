@@ -1,12 +1,17 @@
 package com.two_two.offshoreview.activity;
 
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.two_two.offshoreview.R;
 import com.two_two.offshoreview.fragment.FragmentCatalogCompany;
@@ -14,11 +19,14 @@ import com.two_two.offshoreview.fragment.FragmentEmoneyView;
 import com.two_two.offshoreview.fragment.FragmentInformation;
 import com.two_two.offshoreview.fragment.FragmentOffshoreView;
 import com.two_two.offshoreview.fragment.FragmentVentureView;
-import com.two_two.offshoreview.fragment.NavigationDrawerFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Toolbar toolbar;
+    private Toolbar mToolbar;
+    private NavigationView mDrawer;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private int mSelectedId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,41 +39,63 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.content_frame, fragment).commit();
 
         //work for Toolbar
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(mToolbar);
         //work for navigation drawer
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        mDrawer = (NavigationView) findViewById(R.id.main_drawer);
+        mDrawer.setNavigationItemSelectedListener(this);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(this,
+                mDrawerLayout,
+                mToolbar,
+                R.string.drawer_open,
+                R.string.drawer_close);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+        navigate(mSelectedId);
 
-        NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
     }
 
-    public void onSelectDrawerItem(int position) {
+    private void navigate(int mSelectedId) {
         Fragment fragment = null;
-        switch (position) {
-            case 0:
-                fragment = new FragmentOffshoreView();
-                break;
-            case 1:
-                fragment = new FragmentEmoneyView();
-                break;
-            case 2:
-                fragment = new FragmentVentureView();
-                break;
-            case 3:
-                fragment = new FragmentCatalogCompany();
-                break;
-            case 4:
-                fragment = new FragmentInformation();
-                break;
-            default:
-                break;
+        if(mSelectedId == R.id.navigation_item_1) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+            fragment = new FragmentOffshoreView();
+        }
+        if(mSelectedId == R.id.navigation_item_2) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+            fragment = new FragmentEmoneyView();
+        }
+        if(mSelectedId == R.id.navigation_item_3) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+            fragment = new FragmentVentureView();
+        }
+        if(mSelectedId == R.id.navigation_item_4) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+            fragment = new FragmentCatalogCompany();
+        }
+        if(mSelectedId == R.id.navigation_item_5) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+            fragment = new FragmentInformation();
         }
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, fragment).commit();
         }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+        menuItem.setChecked(true);
+        mSelectedId = menuItem.getItemId();
+        navigate(mSelectedId);
+        return true;
     }
 }
